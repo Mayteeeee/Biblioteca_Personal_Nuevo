@@ -1,0 +1,91 @@
+/* --- ENCABEZADO --- */
+.header-prestamo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.header-prestamo h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.btn-regresar {
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  line-height: 1;
+}
+
+/* --- DETALLES DEL LIBRO --- */
+.tarjeta-info-libro {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.portada-miniatura {
+  width: 50px;
+  height: 50px;
+  background-color: #5d24b3; /* Color morado base del diseño */
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.detalles-libro h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.detalles-libro p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* --- ELEMENTOS DEL FORMULARIO --- */
+.grupo-input label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icono-input {
+  font-size: 16px;
+}
+
+/* Ajuste específico para el área de texto */
+.area-notas {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* --- DISPOSICIÓN RESPONSIVA (FECHAS) --- */
+/* Por defecto en móvil: una debajo de la otra */
+.fila-fechas {
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
+}
+
+@media (min-width: 768px) {
+  .pantalla-registrar-prestamo {
+    margin-top: 0 !important;
+    box-shadow: none !important;
+    min-height: 100vh;
+  }
+}

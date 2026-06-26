@@ -1,0 +1,41 @@
+<div class="app-contenedor">
+  <div class="tarjeta-pantalla pantalla-registrar-prestamo">
+    
+    <header class="header-prestamo">
+      <button class="btn-regresar" routerLink="/prestamos">‹</button>
+      <h2>Registrar préstamo</h2>
+    </header>
+
+    <form class="formulario-prestamo">
+      
+      <div class="grupo-input">
+        <label><span class="icono-input">👤</span> Persona a quien se presta</label>
+        <input type="text" class="campo-texto" placeholder="Nombre completo" required>
+      </div>
+
+      <div class="grupo-input">
+        <label><span class="icono-input">✉️</span> Correo electrónico (opcional)</label>
+        <input type="email" class="campo-texto" placeholder="correo@ejemplo.com">
+      </div>
+
+      <div class="fila-fechas">
+        <div class="grupo-input">
+          <label><span class="icono-input">📅</span> Fecha de préstamo</label>
+          <input type="date" class="campo-texto" required>
+        </div>
+        <div class="grupo-input">
+          <label><span class="icono-input">📅</span> Fecha de devolución</label>
+          <input type="date" class="campo-texto" required>
+        </div>
+      </div>
+
+      <div class="grupo-input">
+        <label>Notas (opcional)</label>
+        <textarea class="campo-texto area-notas" placeholder="Ej. indicaciones, comentarios, etc."></textarea>
+      </div>
+
+      <button type="submit" class="boton-morado">Guardar préstamo</button>
+    </form>
+
+  </div>
+</div>

@@ -1,0 +1,211 @@
+/* Adaptación a tu diseño responsivo global */
+.tarjeta-pantalla {
+  width: 100% !important;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.encabezado-navegacion {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.btn-regresar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333333;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.contenido-pantalla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.icono-libro-contenedor {
+  margin-bottom: 16px;
+}
+
+.icono-libro {
+  width: 40px;
+  height: 40px;
+}
+
+.titulo-pantalla {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333333;
+  text-align: center;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitulo-pantalla {
+  font-size: 14px;
+  color: #666666;
+  text-align: center;
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+}
+
+.ilustracion-contenedor {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.circulo-llave {
+  width: 70px;
+  height: 70px;
+  background-color: #ECE9F9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icono-llave {
+  width: 28px;
+  height: 28px;
+  transform: rotate(-15deg);
+}
+
+.chispa {
+  position: absolute;
+  color: #ffc8a2; /* Tu morado global */
+  font-size: 12px;
+}
+.chispa-1 { top: 10px; right: 8px; }
+.chispa-2 { bottom: 12px; left: 4px; }
+.chispa-3 { top: 28px; left: 10px; font-size: 10px; }
+
+.formulario-contra {
+  width: 100%;
+}
+
+.grupo-input {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.etiqueta-input {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.input-icono-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icono-izq {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Inputs adaptados a tus clases globales */
+.control-input {
+  width: 100%;
+  padding: 12px 42px 12px 40px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  background-color: #FAFAFA;
+  color: #333333;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.control-input:focus {
+  border-color: #ffc8a2;
+  background-color: #ffffff;
+}
+
+.btn-ojo {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.lista-validaciones {
+  margin: -4px 0 20px 4px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item-validacion {
+  font-size: 13px;
+  color: #999999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.item-validacion .icono-check {
+  visibility: hidden;
+}
+
+.item-validacion.cumplido {
+  color: #10B981;
+}
+
+.item-validacion.cumplido .icono-check {
+  visibility: visible;
+}
+
+/* Estado deshabilitado para tu botón morado */
+.boton-morado:disabled {
+  background-color: #ffc8a2;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+.contenedor-volver {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.enlace-volver {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffc8a2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.enlace-volver:hover {
+  text-decoration: underline;
+}

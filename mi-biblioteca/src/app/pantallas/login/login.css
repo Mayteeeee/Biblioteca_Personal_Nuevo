@@ -1,0 +1,159 @@
+.header-navigation {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: #333333;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.btn-back:hover {
+  color: #ff968a;
+}
+
+.login-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.logo-container {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+}
+
+h2 {
+  color: #444444;
+  font-size: 1.8rem;
+  margin-bottom: 35px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+  font-size: 1.1rem;
+  pointer-events: none; 
+}
+
+.input-group input {
+  width: 100%;
+  padding: 16px 15px 16px 48px; 
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+  color: #333333; 
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ffaea5; 
+  box-shadow: 0 0 0 3px rgba(255, 174, 165, 0.2);
+}
+
+.input-group input::placeholder {
+  color: #a0a0a0;
+}
+
+.input-group input[placeholder="Contraseña"] {
+  padding-right: 45px; 
+}
+
+.btn-eye {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  color: #888888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-eye:focus {
+  outline: none;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 35px;
+  width: 100%;
+}
+
+.remember-me {
+    color: #555555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.remember-me input[type="checkbox"] {
+  accent-color: #ffaea5; 
+  cursor: pointer;
+}
+
+.forgot-password {
+  color: #ff968a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-password:hover {
+  color: #e07b70;
+}
+
+.register-redirect {
+  margin-top: 35px;
+  font-size: 0.9rem;
+  color: #555555;
+  text-align: center;
+}
+
+.register-redirect a {
+  color: #ff968a;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.register-redirect a:hover {
+  color: #e07b70;
+}

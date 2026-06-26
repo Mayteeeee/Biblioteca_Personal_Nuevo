@@ -1,0 +1,268 @@
+.libros-wrapper {
+  background-color: #ffffff;
+}
+
+.libros-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.seccion-principal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.libros-header {
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  min-height: 40px;
+}
+
+.titulo-pantalla {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+.regresar {
+  cursor: pointer; 
+  color: #5d24b3; 
+  font-weight: bold; 
+  font-size: 24px; 
+  padding-right: 15px;
+  left: 100%;
+}
+
+.busqueda-contenedor {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-buscar-wrapper {
+  position: relative;
+  flex: 1; 
+}
+
+.icono-buscar {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 10px 10px 10px 38px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.categorias-scroll {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 25px;
+  padding-bottom: 5px;
+  width: 100%; 
+}
+
+.chip {
+  background-color: #f3f0f7;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.chip.active {
+  background-color: #5d24b3;
+  color: white;
+  font-weight: bold;
+}
+
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  color: #888;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.emoji-vacio {
+  font-size: 45px;
+  margin-bottom: 12px;
+}
+
+.texto-vacio-principal {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.texto-vacio-secundario {
+  margin: 6px 0 0 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.navbar-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #888888;
+  text-decoration: none;
+  cursor: pointer;
+  gap: 2px;
+}
+
+.nav-item.active {
+  color: #5d24b3;
+  font-weight: bold;
+}
+
+.nav-icono {
+  font-size: 27px;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.nav-texto {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .libros-content {
+    padding: 40px 80px 100px 80px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .navbar-inferior {
+    position: absolute;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .busqueda-contenedor {
+    max-width: 100%; 
+    margin-bottom: 30px;
+  }
+
+  .categorias-scroll {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 15px; 
+  }
+
+  .chip {
+    padding: 10px 24px; 
+    font-size: 14px;
+  }
+
+  .titulo-pantalla {
+    font-size: 30px;
+  }
+
+  .estado-vacio {
+    min-height: 380px;
+  }
+
+  .emoji-vacio {
+    font-size: 65px;
+  }
+
+  .texto-vacio-principal {
+    font-size: 20px;
+  }
+}
+
+.lista-libros {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.libro-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.icono {
+  font-size: 28px;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.info p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+.btn-eliminar {
+  margin-left: auto;
+  border: none;
+  background: #ffe1e1;
+  color: #c0392b;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-eliminar:hover {
+  background: #ffbcbc;
+}

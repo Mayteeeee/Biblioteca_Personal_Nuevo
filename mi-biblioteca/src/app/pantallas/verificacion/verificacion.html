@@ -1,0 +1,45 @@
+<div class="mobile-container" class="tarjeta-pantalla">
+  
+  <div class="header-navigation">
+    <button class="btn-back" routerLink="/login">‹</button>
+  </div>
+
+  <div class="verification-content">
+    
+    <div class="logo-container">
+      <span class="book-icon">📖</span>
+    </div>
+
+    <h2>Ingresa el código de verificación</h2>
+    
+    <p class="subtitle-text">
+      Hemos enviado un código de 6 dígitos a:<br>
+      <strong class="user-email">ejemplo@correo.com</strong>
+    </p>
+
+    <div class="lock-illustration">
+      <div class="badge-circle">🔒</div>
+    </div>
+
+    <div class="code-inputs-container">
+      <input type="text" maxlength="1" class="code-input" placeholder="1" pattern="[0-9]*" inputmode="numeric">
+      <input type="text" maxlength="1" class="code-input" placeholder="2" pattern="[0-9]*" inputmode="numeric">
+      <input type="text" maxlength="1" class="code-input" placeholder="3" pattern="[0-9]*" inputmode="numeric">
+      <input type="text" maxlength="1" class="code-input" placeholder="4" pattern="[0-9]*" inputmode="numeric">
+      <input type="text" maxlength="1" class="code-input" placeholder="5" pattern="[0-9]*" inputmode="numeric">
+      <input type="text" maxlength="1" class="code-input" placeholder="6" pattern="[0-9]*" inputmode="numeric">
+    </div>
+
+    
+
+    <button type="button" routerLink="/nuevacontra" class="boton-morado">Verificar código</button>
+
+    <a routerLink="/verificacion" class="link-action link-purple">Reenviar código</a>
+
+  </div>
+
+  <div class="footer-navigation">
+    <a routerLink="/login" class="link-action link-gray">Volver al inicio de sesión</a>
+  </div>
+
+</div>

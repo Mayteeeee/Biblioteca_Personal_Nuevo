@@ -1,0 +1,90 @@
+<div class="app-contenedor libros-wrapper">
+  <div class="tarjeta-pantalla libros-content">
+    
+    <div class="seccion-principal">
+      
+      <div class="libros-header">
+        <h2 class="titulo-pantalla">Mis libros</h2>
+      </div>
+
+      <div class="busqueda-contenedor">
+        <div class="input-buscar-wrapper">
+          <span class="icono-buscar">🔍</span>
+          <input
+            type="text"
+            placeholder="Buscar libro..."
+            class="input-busqueda"
+            [(ngModel)]="textoBusqueda"
+            (input)="aplicarFiltro()">
+        </div>
+      </div>
+
+      <div class="categorias-scroll">
+        <div class="filtros">
+          <span class="chip" [class.active]="filtroActivo === 'todos'" (click)="cambiarFiltro('todos')">Todos</span>
+          <span class="chip" [class.active]="filtroActivo === 'leido'" (click)="cambiarFiltro('leido')">Leídos</span>
+          <span class="chip" [class.active]="filtroActivo === 'porleer'" (click)="cambiarFiltro('porleer')">Por leer</span>
+          <span class="chip" [class.active]="filtroActivo === 'favorito'" (click)="cambiarFiltro('favorito')">Favoritos</span>
+        </div>
+      </div>
+
+      <div>
+        <div *ngIf="datosCargados && librosFiltrados.length === 0">
+          <p>No tienes libros registrados</p>
+        </div>
+
+        <div class="lista-libros">
+          <div 
+            class="libro-card" 
+            *ngFor="let libro of librosFiltrados"
+            [routerLink]="['/detalleslibro', libro.id]"
+            style="cursor: pointer;"
+          >
+            <div class="icono">📖</div>
+
+            <div class="info">
+              <h3>{{ libro.titulo }}</h3>
+              <p>{{ libro.estado }}</p>
+            </div>
+
+            <button
+              type="button"
+              class="btn-eliminar"
+              (click)="eliminarLibro(libro.id!, $event)">
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="navbar-inferior">
+      <div class="nav-item">
+        <div class="nav-icono" routerLink="/panelprincipal">🏠</div>
+        <span class="nav-texto">Inicio</span>
+      </div>
+
+      <div class="nav-item active">
+        <div class="nav-icono">📖</div>
+        <span class="nav-texto">Mis libros</span>
+      </div>
+
+      <div class="nav-item">
+        <div class="nav-icono" routerLink="/agregareditar">➕</div>
+        <span class="nav-texto">Agregar</span>
+      </div>
+
+      <div class="nav-item">
+        <div class="nav-icono" routerLink="/prestamos">🔖</div>
+        <span class="nav-texto">Préstamos</span>
+      </div>
+
+      <div class="nav-item">
+        <div class="nav-icono" routerLink="/configuracion">👤</div>
+        <span class="nav-texto">Perfil</span>
+      </div>
+    </div>
+
+  </div>
+</div>

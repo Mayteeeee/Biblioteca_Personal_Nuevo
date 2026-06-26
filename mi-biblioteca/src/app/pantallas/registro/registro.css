@@ -1,0 +1,139 @@
+:host {
+    display: block;
+    min-height: 100vh;
+}
+
+.app-contenedor {
+    padding-top: 0 !important; 
+    min-height: 100vh;
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.tarjeta-pantalla {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0 !important; 
+}
+
+.btn-regresar {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: #333333;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.btn-regresar:hover {
+  color: #ff968a;
+}
+
+.btn-regresar i,
+.btn-regresar span {
+  display: none;
+}
+
+.btn-regresar::before {
+  content: "\2039";
+}
+
+h2 {
+  color: #444444;
+  font-size: 1.8rem;
+  margin-bottom: 35px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.formulario {
+  width: 100%;
+}
+
+.grupo-input {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.icono {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.grupo-input input {
+  width: 100%;
+  padding: 16px 45px 16px 48px;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  font-size: 16px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+  color: #333333;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.grupo-input input:focus {
+  border-color: #ffaea5;
+  box-shadow: 0 0 0 3px rgba(255, 174, 165, 0.2);
+}
+
+.grupo-input input::placeholder {
+  color: #a0a0a0;
+}
+
+.btn-eye {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  color: #888888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-eye:focus {
+  outline: none;
+}
+
+.boton-morado {
+  margin-top: 15px;
+}
+
+.login-link {
+  margin-top: 35px;
+  font-size: 0.9rem;
+  color: #555555;
+  text-align: center;
+}
+
+.login-link a {
+  color: #ff968a;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.login-link a:hover {
+  color: #e07b70;
+}

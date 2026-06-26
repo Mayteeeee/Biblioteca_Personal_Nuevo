@@ -1,0 +1,175 @@
+<div class="mobile-container">
+
+  <header class="header-navigation">
+    <button class="btn-back" [routerLink]="['/mislibros']">&lsaquo;</button>
+  </header>
+
+  <div *ngIf="!libro">
+    <p>Cargando libro...</p>
+  </div>
+
+  <div *ngIf="libro">
+
+    <div class="book-main-info">
+      <div class="book-cover-placeholder">
+        <img
+          *ngIf="libro.imagen"
+          [src]="libro.imagen"
+          class="book-cover-img"
+          alt="Portada del libro">
+
+        <span *ngIf="!libro.imagen" class="cover-icon">📕</span>
+      </div>
+
+      <h2 class="book-title">{{ libro.titulo || 'Sin título' }}</h2>
+      <p class="book-author">{{ libro.autor || 'Autor desconocido' }}</p>
+
+      <div class="book-rating-container">
+        <p class="rating-instruction">Toca una estrella para puntuar:</p>
+
+        <div class="book-rating">
+          <span class="stars">
+            <span
+              *ngFor="let estrella of maxEstrellas"
+              [class.estrella-activa]="estrella <= libro.calificacion"
+              class="star-icon"
+              (click)="puntuarLibro(estrella)">
+              ★
+            </span>
+          </span>
+
+          <span class="rating-number">
+            ({{ libro.calificacion || 0 }})
+          </span>
+        </div>
+      </div>
+
+      <div class="status-badge-container">
+        <span class="status-badge">{{ libro.estado || 'Sin estado' }}</span>
+      </div>
+
+      <button
+        type="button"
+        class="boton-morado boton-editar"
+        [routerLink]="['/agregareditar', libro.id || idLibro]">
+        ✏️ Editar libro
+      </button>
+    </div>
+
+    <nav class="tabs-container">
+      <button
+        class="tab-btn"
+        [class.active]="pestanaActiva === 'informacion'"
+        (click)="cambiarPestana('informacion')">
+        Información
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.active]="pestanaActiva === 'resena'"
+        (click)="cambiarPestana('resena')">
+        Reseña
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.active]="pestanaActiva === 'prestamos'"
+        (click)="cambiarPestana('prestamos')">
+        Préstamos
+      </button>
+    </nav>
+
+    <div class="tab-content-area">
+
+      <div *ngIf="pestanaActiva === 'informacion'" class="info-panel">
+        <div class="info-card">
+          <h4>Detalles del libro</h4>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Título</span>
+            <span class="detalle-valor">{{ libro.titulo || 'Sin título' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Autor</span>
+            <span class="detalle-valor">{{ libro.autor || 'Autor desconocido' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Categoría</span>
+            <span class="detalle-valor">{{ libro.categoria || 'Sin categoría' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Editorial</span>
+            <span class="detalle-valor">{{ libro.editorial || 'Sin editorial' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Año</span>
+            <span class="detalle-valor">{{ libro.anio || 'Sin año' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Páginas</span>
+            <span class="detalle-valor">{{ libro.paginas || 'Sin páginas' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Estado</span>
+            <span class="detalle-valor">{{ libro.estado || 'Sin estado' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Calificación</span>
+            <span class="detalle-valor">{{ libro.calificacion || 0 }} / 5</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="pestanaActiva === 'resena'" class="empty-tab-panel">
+        <div class="no-info-card blue-card">
+          <span class="alert-icon">📝</span>
+          <h4>Reseña personal</h4>
+
+          <textarea
+            class="textarea-resena"
+            placeholder="Escribe aquí tu opinión sobre este libro..."
+            [(ngModel)]="libro.resena">
+          </textarea>
+
+          <button
+            type="button"
+            class="boton-morado"
+            (click)="guardarResena()">
+            Guardar reseña
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="pestanaActiva === 'prestamos'" class="empty-tab-panel">
+        <div class="no-info-card gray-card">
+          <span class="alert-icon">📊</span>
+          <h4>Historial de préstamos</h4>
+
+          <div class="prestamo-item">
+            <p><strong>Estado:</strong> Sin préstamos registrados</p>
+            <p class="placeholder-text">
+              Cuando registres un préstamo de este libro, aquí aparecerá su historial.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="boton-morado"
+            [routerLink]="['/registrarlibro']">
+            Registrar préstamo
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

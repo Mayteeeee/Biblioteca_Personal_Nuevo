@@ -1,0 +1,106 @@
+<div class="tarjeta-pantalla">
+
+  <div style="display: flex; align-items: center; margin-bottom: 25px;">
+    <span style="cursor: pointer; color: #5d24b3; font-weight: bold; font-size: 24px; padding-right: 15px;" routerLink="/mislibros">
+      ‹
+    </span>
+    <h2 style="margin: 0; font-size: 20px; font-weight: bold; color: #333;">
+      {{ modoEdicion ? 'Editar libro' : 'Agregar nuevo libro' }}
+    </h2>
+  </div>
+
+  <div style="text-align: center; margin-bottom: 25px;">
+    <label for="input-portada" style="cursor: pointer; display: inline-block;">
+      <div style="width: 110px; height: 140px; border: 2px dashed #b39ddb; border-radius: 8px; background-color: #fcfaff; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;">
+
+        @if (!libro.imagen) {
+          <span style="font-size: 28px; color: #5d24b3;">📸</span>
+          <span style="font-size: 11px; color: #5d24b3; font-weight: 600;">Agregar Portada</span>
+        } @else {
+          <img [src]="libro.imagen" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;" alt="Portada">
+        }
+
+      </div>
+    </label>
+
+    <input type="file" id="input-portada" accept="image/*" style="display: none;" (change)="onFileSelected($event)">
+  </div>
+
+  <form style="flex-grow: 1; display: flex; flex-direction: column; gap: 14px;" (ngSubmit)="guardarLibro()">
+
+    <div>
+      <label class="etiqueta-formulario">Título del libro</label>
+      <input type="text" class="campo-texto" placeholder="Ej. El Principito" name="titulo" [(ngModel)]="libro.titulo">
+    </div>
+
+    <div>
+      <label class="etiqueta-formulario">Autor</label>
+      <input type="text" class="campo-texto" placeholder="Ej. Antoine de Saint-Exupéry" name="autor" [(ngModel)]="libro.autor">
+    </div>
+
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1;">
+        <label class="etiqueta-formulario">Categoría</label>
+        <select class="campo-texto" style="background-color: white;" name="categoria" [(ngModel)]="libro.categoria">
+          <option value="">Seleccionar</option>
+          <option value="fantasia">Fantasía</option>
+          <option value="novela">Novela</option>
+          <option value="drama">Drama</option>
+          <option value="ciencia">Ciencia Ficción</option>
+        </select>
+      </div>
+
+      <div style="flex: 1;">
+        <label class="etiqueta-formulario">Estado</label>
+        <select class="campo-texto" style="background-color: white;" name="estado" [(ngModel)]="libro.estado">
+          <option value="leido">Leído</option>
+          <option value="porleer">Por leer</option>
+          <option value="favorito">Favorito</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="etiqueta-formulario">Editorial</label>
+      <input type="text" class="campo-texto" placeholder="Ej. Reynal & Hitchcock" name="editorial" [(ngModel)]="libro.editorial">
+    </div>
+
+    <div style="display: flex; gap: 12px;">
+      <div style="flex: 1;">
+        <label class="etiqueta-formulario">Año</label>
+        <input type="number" class="campo-texto" placeholder="Ej. 1943" name="anio" [(ngModel)]="libro.anio">
+      </div>
+
+      <div style="flex: 1;">
+        <label class="etiqueta-formulario">Páginas</label>
+        <input type="number" class="campo-texto" placeholder="Ej. 96" name="paginas" [(ngModel)]="libro.paginas">
+      </div>
+    </div>
+
+    <div style="margin-top: 5px; margin-bottom: 25px;">
+      <label class="etiqueta-formulario" style="margin-bottom: 8px;">Calificación</label>
+
+      <div style="display: flex; gap: 8px; font-size: 26px;">
+        @for (estrella of [1, 2, 3, 4, 5]; track estrella) {
+          <span
+            style="cursor: pointer;"
+            [style.color]="estrella <= libro.calificacion ? '#ffc107' : '#e0e0e0'"
+            (click)="cambiarCalificacion(estrella)">
+            ★
+          </span>
+        }
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 12px; margin-top: auto; padding-bottom: 15px;">
+      <button type="button" class="boton-cancelar" routerLink="/mislibros">
+        Cancelar
+      </button>
+
+      <button type="submit" class="boton-morado" style="flex: 2; padding: 14px;">
+        {{ modoEdicion ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+
+  </form>
+</div>

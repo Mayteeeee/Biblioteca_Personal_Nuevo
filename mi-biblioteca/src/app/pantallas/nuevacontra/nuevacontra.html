@@ -1,0 +1,95 @@
+<div class="tarjeta-pantalla"> <div class="encabezado-navegacion">
+    <button class="btn-regresar" (click)="irAlLogin()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+  </div>
+
+  <div class="contenido-pantalla">
+    <div class="icono-libro-contenedor">
+      <svg class="icono-libro" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </svg>
+    </div>
+
+    <h1 class="titulo-pantalla">Crea una nueva contraseña</h1>
+    <p class="subtitulo-pantalla">Ingresa tu nueva contraseña para continuar.</p>
+
+    <div class="ilustracion-contenedor">
+      <div class="circulo-llave">
+        <svg class="icono-llave" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+        </svg>
+      </div>
+      <span class="chispa chispa-1">✦</span>
+      <span class="chispa chispa-2">✦</span>
+      <span class="chispa chispa-3">✦</span>
+    </div>
+
+    <form [formGroup]="formContra" (ngSubmit)="actualizarContrasena()" class="formulario-contra">
+      
+      <div class="grupo-input">
+        <label class="etiqueta-input">Nueva contraseña</label>
+        <div class="input-icono-wrapper">
+          <span class="icono-izq">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </span>
+          <input 
+            [type]="mostrarNueva ? 'text' : 'password'" 
+            formControlName="nuevaContra" 
+            placeholder="Ingresa tu nueva contraseña"
+            class="control-input"
+          />
+          <button type="button" class="btn-ojo" (click)="mostrarNueva = !mostrarNueva">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="lista-validaciones">
+        <div class="item-validacion" [class.cumplido]="validaciones.minCaracteres">
+          <span class="icono-check">✓</span> Mínimo 8 caracteres
+        </div>
+        <div class="item-validacion" [class.cumplido]="validaciones.unaMayuscula">
+          <span class="icono-check">✓</span> Una letra mayúscula
+        </div>
+        <div class="item-validacion" [class.cumplido]="validaciones.unaMinuscula">
+          <span class="icono-check">✓</span> Una letra minúscula
+        </div>
+        <div class="item-validacion" [class.cumplido]="validaciones.unNumero">
+          <span class="icono-check">✓</span> Un número
+        </div>
+        <div class="item-validacion" [class.cumplido]="validaciones.unCaracterEspecial">
+          <span class="icono-check">✓</span> Un carácter especial (!@#$%)
+        </div>
+      </div>
+
+      <div class="grupo-input">
+        <label class="etiqueta-input">Confirmar nueva contraseña</label>
+        <div class="input-icono-wrapper">
+          <span class="icono-izq">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </span>
+          <input 
+            [type]="mostrarConfirmar ? 'text' : 'password'" 
+            formControlName="confirmarContra" 
+            placeholder="Confirma tu nueva contraseña"
+            class="control-input"
+          />
+          <button type="button" class="btn-ojo" (click)="mostrarConfirmar = !mostrarConfirmar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="formContra.invalid" class="boton-morado" >
+        Actualizar contraseña
+      </button>
+
+      <div class="contenedor-volver">
+        <a class="enlace-volver" (click)="irAlLogin()">Volver al inicio de sesión</a>
+      </div>
+    </form>
+  </div>
+
+</div>

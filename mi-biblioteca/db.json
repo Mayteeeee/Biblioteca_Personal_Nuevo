@@ -1,0 +1,27 @@
+{
+  "libros": [
+    {
+      "titulo": "El principito",
+      "autor": "",
+      "categoria": "",
+      "estado": "favorito",
+      "editorial": "",
+      "calificacion": 5,
+      "imagen": null,
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "titulo": "1984",
+      "estado": "leido",
+      "calificacion": 3,
+      "resena": "ljznkjknsd\nlj aksbfkjaf\nsjafbkas dfkjs\nknsf kjdnf"
+    },
+    {
+      "id": "3",
+      "titulo": "Hábitos",
+      "estado": "porleer"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

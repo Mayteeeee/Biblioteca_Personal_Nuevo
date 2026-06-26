@@ -1,0 +1,73 @@
+/* --- ESTILOS GENERALES (Para todos los dispositivos) --- */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #333;
+}
+
+/* El contenedor principal ya no tiene un tamaño fijo de celular. 
+   Ahora se adapta al 100% del ancho disponible, pero con un límite en pantallas grandes. */
+.app-contenedor {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Una tarjeta contenedora para tus vistas, común en diseños modernos */
+.tarjeta-pantalla {
+    width: 100%;
+    max-width: 450px; /* En computadoras no se hará gigante, mantendrá un tamaño cómodo */
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+/* El estilo responsivo de tus botones morados */
+.boton-morado {
+    background-color: #5d24b3;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.boton-morado:hover {
+    background-color: #4a1c91; /* Se oscurece un poco al pasar el mouse en compu */
+}
+
+/* El estilo de las cajas de texto */
+.campo-texto {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px; /* Evita que el celular haga un zoom molesto al escribir */
+}
+
+/* --- MEDIA QUERIES (Reglas exclusivas para pantallas grandes como computadoras) --- */
+@media (min-width: 768px) {
+    body {
+        background-color: #e9ecef; /* Un fondo un poco más oscuro en compu para contrastar */
+    }
+
+    .tarjeta-pantalla {
+        margin-top: 50px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra más pronunciada en compu */
+    }
+}

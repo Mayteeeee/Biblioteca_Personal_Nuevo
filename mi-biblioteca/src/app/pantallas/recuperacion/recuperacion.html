@@ -1,0 +1,48 @@
+<div class="tarjeta-pantalla">
+
+  <div class="header-pantalla">
+    <button class="btn-regresar" (click)="regresar()">‹</button>
+    <h2>¿Olvidaste tu contraseña?</h2>
+  </div>
+
+  <div class="icono-central emoji-gigante">
+    📖
+  </div>
+
+  <p class="descripcion">
+    Ingresa tu correo electrónico y te enviaremos un código para restablecer tu contraseña.
+  </p>
+
+
+  <label for="correo">
+    Correo electrónico
+  </label>
+  
+  <div class="icono-central emoji-gigante">
+    ✉️
+  </div>
+  
+  <div class="campo-icono">
+    <i class="ti ti-mail icono" aria-hidden="true"></i>
+    <input
+      class="campo-texto campo-con-icono"
+      type="email"
+      id="correo"
+      placeholder="ejemplo@correo.com"
+      [(ngModel)]="correo"
+    />
+  </div>
+
+  <button class="boton-morado" routerLink="/verificacion">
+    Enviar código
+  </button>
+
+  <div class="ayuda-correo">
+    <p>
+      <span class="emoji-mediano">ℹ️</span> 
+      Revisa tu carpeta de spam si no recibes el correo
+    </p>
+    <a (click)="regresar()" class="link-volver">Volver al inicio de sesión</a>
+  </div>
+
+</div>

@@ -1,0 +1,143 @@
+.inicio-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%; 
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.inicio-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-brand-centro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.icono-book {
+  font-size: 26px; 
+  display: inline-block; 
+}
+
+.titulo-brand {
+  font-weight: bold;
+  font-size: 30px;
+  margin: 0;
+  text-align: center;
+}
+
+.hero-img {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.hero-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.inicio-contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.eslogan {
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  max-width: 280px;
+}
+
+.descripcion {
+  text-align: center;
+  font-size: 15px;      
+  font-weight: normal;  
+  color: #666;          
+  line-height: 1.6;     
+  margin-bottom: 30px;  
+  max-width: 280px;     
+}
+
+.inicio-acciones {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .inicio-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    width: 100%; 
+    min-height: 100vh;
+    padding: 50px 80px; 
+    box-sizing: border-box;
+    gap: 20px;
+  }
+
+  .inicio-header {
+    grid-column: span 2; 
+    margin-bottom: 50px;
+    justify-content: flex-start;
+  }
+
+  .logo-brand-centro {
+    justify-content: flex-start;
+  }
+
+  .titulo-brand {
+    font-size: 30px;
+    text-align: left;
+  }
+
+  .hero-img {
+    grid-column: 1; 
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inicio-contenido {
+    grid-column: 2; 
+    align-items: flex-start; 
+    padding-left: 60px; 
+  }
+
+  .eslogan {
+    font-weight: bold;
+    text-align: left;
+    font-size: 28px; 
+    max-width: 450px; 
+    margin-bottom: 15px;
+  }
+
+  .descripcion {
+    text-align: left;
+    font-size: 18px;     
+    font-weight: normal; 
+    line-height: 1.6;     
+    margin-bottom: 40px;  
+    max-width: 450px;    
+  }
+
+  .inicio-acciones {
+    max-width: 320px; 
+  }
+}

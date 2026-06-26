@@ -1,0 +1,118 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f8e9df;
+  color: #333;
+}
+
+.app-contenedor {
+  width: 100% !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.tarjeta-pantalla {
+  width: 100% !important;
+  min-height: 100vh;
+  background-color: #f8e9df;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.campo-texto {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+/* #5d24b3*/
+.boton-morado {
+  width: 100%;
+  background-color: #ffaea5;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(93, 36, 179, 0.25);
+  transition: background-color 0.2s, transform 0.1s;
+}
+/* #4a1c91*/
+.boton-morado:hover {
+    background-color: #ff968a;
+}
+
+
+.campo-texto {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+
+@media (min-width: 768px) {
+    body {
+        background-color: #e9ecef; 
+    }
+
+    .tarjeta-pantalla {
+        margin-top: 0 !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    }
+}
+app-root {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+}
+
+.header-pantalla {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  position: relative;      
+  width: 100%;
+  margin-bottom: 25px;
+  min-height: 44px;        
+}
+
+.header-pantalla h1, 
+.header-pantalla h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  flex: 1;                 
+}
+
+
+.header-pantalla .btn-regresar,
+.header-pantalla .btn-menu {
+  position: absolute;
+  left: 0;                 
+  top: 50%;
+  transform: translateY(-50%); 
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  z-index: 10;             
+}
