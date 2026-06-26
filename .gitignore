@@ -1,4 +1,15 @@
-node_modules
-.angular
+# Dependencias
+node_modules/
+**/node_modules/
+
+# Angular
+.angular/
+**/.angular/
+
+# Variables de entorno
 .env
+**/.env
+
+# Archivos del sistema
 .DS_Store
+Thumbs.db
