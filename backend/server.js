@@ -11,8 +11,11 @@ conectarDB();
 app.use(cors());
 app.use(express.json());
 
+// Rutas
+app.use('/usuarios', require('./routes/usuarioRoutes'));
+
 app.get('/', (req, res) => {
-  res.send('API Biblioteca Personal funcionando');
+    res.send('API Biblioteca Personal funcionando');
 });
 
 app.use('/prestamos', require('./routes/prestamos'));
