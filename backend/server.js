@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const conectarDB = require('./config/database');
+const libroRoutes = require('./routes/libroRoutes');
 
 const app = express();
 
@@ -10,6 +11,7 @@ conectarDB();
 
 app.use(cors());
 app.use(express.json());
+app.use('/libros', libroRoutes);
 
 // Rutas
 app.use('/usuarios', require('./routes/usuarioRoutes'));
