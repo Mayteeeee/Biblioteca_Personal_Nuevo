@@ -1,12 +1,12 @@
 const Prestamo = require('../models/Prestamo');
-//const Libro = require('../models/Libro'); 
+const Libro = require('../models/Libro'); 
 
 exports.registrarPrestamo = async (req, res) => {
   try {
     const nuevoPrestamo = new Prestamo(req.body);
     await nuevoPrestamo.save();
 
-    //await Libro.findByIdAndUpdate(req.body.libroId, { estado: 'prestado' });
+    await Libro.findByIdAndUpdate(req.body.libroId, { estado: 'prestado' });
 
     res.status(201).json({ mensaje: 'Préstamo registrado y libro actualizado', nuevoPrestamo });
   } catch (error) {
@@ -47,7 +47,7 @@ exports.marcarDevolucion = async (req, res) => {
       return res.status(404).json({ error: 'Préstamo no encontrado' });
     }
 
-    //await Libro.findByIdAndUpdate(prestamoActualizado.libroId, { estado: 'disponible' });
+    await Libro.findByIdAndUpdate(prestamoActualizado.libroId, { estado: 'disponible' });
 
     res.json({ mensaje: 'Libro devuelto con éxito', prestamoActualizado });
   } catch (error) {
