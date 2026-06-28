@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const conectarDB = require('./config/database');
-const libroRoutes = require('./routes/libroRoutes');
 
 const app = express();
 
@@ -11,10 +10,11 @@ conectarDB();
 
 app.use(cors());
 app.use(express.json());
-app.use('/libros', libroRoutes);
 
 // Rutas
 app.use('/usuarios', require('./routes/usuarioRoutes'));
+app.use('/libros', require('./routes/libroRoutes'));
+app.use('/prestamos', require('./routes/prestamos'));
 
 app.get('/', (req, res) => {
     res.send('API Biblioteca Personal funcionando');
@@ -23,5 +23,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log("Servidor corriendo en el puerto " + PORT);
 });
