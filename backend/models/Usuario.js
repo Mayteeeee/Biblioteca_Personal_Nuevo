@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
-const UsuarioSchema = new mongoose.Schema({
+const usuarioSchema = new mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     correo: {
         type: String,
         required: true,
-        unique: true // Evita que se registren correos repetidos
+        unique: true,
+        trim: true
     },
     password: {
         type: String,
@@ -16,12 +18,12 @@ const UsuarioSchema = new mongoose.Schema({
     },
     foto: {
         type: String,
-        default: "" // Puede iniciar vacío
+        default: "" // Puede ser URL o Base64
     },
     fechaRegistro: {
         type: Date,
-        default: Date.now // Guarda la fecha del momento exacto del registro
+        default: Date.now // Se genera automáticamente la fecha actual
     }
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+module.exports = mongoose.model('Usuario', usuarioSchema);

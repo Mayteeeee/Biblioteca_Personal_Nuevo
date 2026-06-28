@@ -11,14 +11,15 @@ conectarDB();
 app.use(cors());
 app.use(express.json());
 
+// Rutas
+app.use('/usuarios', require('./routes/usuarioRoutes'));
+
 app.get('/', (req, res) => {
-  res.send('API Biblioteca Personal funcionando');
+    res.send('API Biblioteca Personal funcionando');
 });
 
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
-
-app.use('/usuarios', require('./routes/usuarioRoutes'));
