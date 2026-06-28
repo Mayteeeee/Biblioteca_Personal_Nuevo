@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
 
 app.use('/prestamos', require('./routes/prestamos'));
 
-const PUERTO = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
-app.listen(PUERTO, () => {
-  console.log(`Servidor corriendo en el puerto ${PUERTO}`);
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
