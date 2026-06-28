@@ -11,7 +11,7 @@ conectarDB();
 
 app.use(cors());
 app.use(express.json());
-app.use('/api/libros', libroRoutes);
+app.use('/libros', libroRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Biblioteca Personal funcionando');
