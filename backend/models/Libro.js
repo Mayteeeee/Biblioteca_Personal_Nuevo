@@ -27,8 +27,13 @@ const libroSchema = new mongoose.Schema({
     },
     estado: {
         type: String,
-        enum: ['leído', 'por leer', 'favorito', 'prestado'], 
+        enum: ['leído', 'por leer', 'favorito'],
         default: 'por leer'
+    },
+    estadoPrestamo: {
+        type: String,
+        enum: ['disponible', 'prestado', 'devuelto'],
+        default: 'disponible'
     },
     calificacion: {
         type: Number,
