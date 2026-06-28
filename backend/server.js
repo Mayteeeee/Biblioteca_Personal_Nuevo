@@ -15,8 +15,10 @@ app.get('/', (req, res) => {
   res.send('API Biblioteca Personal funcionando');
 });
 
-const PORT = process.env.PORT || 4000;
+app.use('/prestamos', require('./routes/prestamos'));
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+const PUERTO = process.env.PORT || 4000;
+
+app.listen(PUERTO, () => {
+  console.log(`Servidor corriendo en el puerto ${PUERTO}`);
 });
