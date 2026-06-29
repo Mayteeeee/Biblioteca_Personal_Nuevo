@@ -3,6 +3,7 @@ import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { LibrosService } from '../../services/libros.service';
+import { AuthService } from '../../services/auth.service';
 import { Libro } from '../../models/libro.model';
 
 @Component({
@@ -21,17 +22,20 @@ export class Agregareditar implements OnInit {
     titulo: '',
     autor: '',
     categoria: '',
-    estado: 'porleer',
+    estado: 'por leer',
+    estadoPrestamo: 'disponible',
     editorial: '',
     anio: undefined,
     paginas: undefined,
-    calificacion: 0,
+    calificacion: 1,
     imagen: null,
-    resena: ''
+    resena: '',
+    usuarioId: ''
   };
 
   constructor(
     private librosService: LibrosService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
@@ -40,24 +44,32 @@ export class Agregareditar implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (!id) return;
+    if (!id) {
+      this.libro.usuarioId = this.authService.obtenerUsuarioId();
+      return;
+    }
 
     this.modoEdicion = true;
     this.idLibro = id;
 
     this.librosService.obtenerLibroPorId(id).subscribe({
       next: (data) => {
-        this.libro.id = data.id || id;
-        this.libro.titulo = data.titulo || '';
-        this.libro.autor = data.autor || '';
-        this.libro.categoria = data.categoria || '';
-        this.libro.estado = data.estado || 'porleer';
-        this.libro.editorial = data.editorial || '';
-        this.libro.anio = data.anio;
-        this.libro.paginas = data.paginas;
-        this.libro.calificacion = data.calificacion || 0;
-        this.libro.imagen = data.imagen || null;
-        this.libro.resena = data.resena || '';
+        this.libro = {
+          _id: data._id,
+          id: data._id || data.id || id,
+          titulo: data.titulo || '',
+          autor: data.autor || '',
+          categoria: data.categoria || '',
+          estado: data.estado || 'por leer',
+          estadoPrestamo: data.estadoPrestamo || 'disponible',
+          editorial: data.editorial || '',
+          anio: data.anio,
+          paginas: data.paginas,
+          calificacion: data.calificacion || 1,
+          imagen: data.imagen || null,
+          resena: data.resena || '',
+          usuarioId: data.usuarioId || this.authService.obtenerUsuarioId()
+        };
 
         this.cdr.detectChanges();
       },
@@ -89,9 +101,49 @@ export class Agregareditar implements OnInit {
   }
 
   guardarLibro(): void {
-    if (!this.libro.titulo.trim()) {
+    if (!this.libro.titulo?.trim()) {
       alert('Escribe el título del libro.');
       return;
+    }
+
+    if (!this.libro.autor?.trim()) {
+      alert('Escribe el autor del libro.');
+      return;
+    }
+
+    if (!this.libro.categoria?.trim()) {
+      alert('Selecciona una categoría.');
+      return;
+    }
+
+    if (!this.libro.editorial?.trim()) {
+      alert('Escribe la editorial.');
+      return;
+    }
+
+    if (!this.libro.anio) {
+      alert('Escribe el año del libro.');
+      return;
+    }
+
+    if (!this.libro.paginas) {
+      alert('Escribe el número de páginas.');
+      return;
+    }
+
+    this.libro.usuarioId = this.authService.obtenerUsuarioId();
+
+    if (!this.libro.usuarioId) {
+      alert('No se encontró el usuario. Inicia sesión nuevamente.');
+      return;
+    }
+
+    if (!this.libro.estadoPrestamo) {
+      this.libro.estadoPrestamo = 'disponible';
+    }
+
+    if (!this.libro.calificacion || this.libro.calificacion < 1) {
+      this.libro.calificacion = 1;
     }
 
     if (this.modoEdicion) {
@@ -101,25 +153,55 @@ export class Agregareditar implements OnInit {
     }
   }
 
+  private construirLibroParaGuardar(): any {
+    return {
+      titulo: this.libro.titulo,
+      autor: this.libro.autor,
+      categoria: this.libro.categoria,
+      estado: this.libro.estado,
+      estadoPrestamo: this.libro.estadoPrestamo || 'disponible',
+      editorial: this.libro.editorial,
+      anio: this.libro.anio,
+      paginas: this.libro.paginas,
+      calificacion: this.libro.calificacion || 1,
+      imagen: this.libro.imagen || '',
+      resena: this.libro.resena || '',
+      usuarioId: this.libro.usuarioId
+    };
+  }
+
   private agregarLibro(): void {
-    this.librosService.agregarLibro(this.libro).subscribe({
+    const libroNuevo = this.construirLibroParaGuardar();
+
+    this.librosService.agregarLibro(libroNuevo).subscribe({
       next: () => {
         alert('Libro guardado correctamente.');
         this.router.navigate(['/mislibros']);
       },
-      error: () => {
+      error: (err) => {
+        console.log('Error al guardar libro:', err.error);
         alert('No fue posible guardar el libro.');
       }
     });
   }
 
   private actualizarLibro(): void {
-    this.librosService.actualizarLibro(this.idLibro, this.libro).subscribe({
+    const id = this.libro._id || this.libro.id || this.idLibro;
+
+    if (!id) {
+      alert('No se encontró el libro.');
+      return;
+    }
+
+    const libroActualizado = this.construirLibroParaGuardar();
+
+    this.librosService.actualizarLibro(id, libroActualizado).subscribe({
       next: () => {
         alert('Libro actualizado correctamente.');
         this.router.navigate(['/mislibros']);
       },
-      error: () => {
+      error: (err) => {
+        console.log('Error al actualizar libro:', err.error);
         alert('No fue posible actualizar el libro.');
       }
     });
