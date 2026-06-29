@@ -11,7 +11,6 @@ conectarDB();
 app.use(cors());
 app.use(express.json());
 
-// Rutas
 app.use('/usuarios', require('./routes/usuarioRoutes'));
 app.use('/libros', require('./routes/libroRoutes'));
 app.use('/prestamos', require('./routes/prestamos'));

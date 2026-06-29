@@ -19,9 +19,27 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, datos);
   }
 
+  obtenerPerfil(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  editarPerfil(id: string, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, datos);
+  }
+
+  cambiarPassword(id: string, datos: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/password/${id}`, datos);
+  }
+
   guardarSesion(usuario: any): void {
     localStorage.setItem('logueado', 'true');
-    localStorage.setItem('usuarioId', usuario.id);
+    localStorage.setItem('usuarioId', usuario.id || usuario._id);
+    localStorage.setItem('usuario', usuario.nombre);
+    localStorage.setItem('correo', usuario.correo);
+    localStorage.setItem('foto', usuario.foto || '');
+  }
+
+  actualizarDatosSesion(usuario: any): void {
     localStorage.setItem('usuario', usuario.nombre);
     localStorage.setItem('correo', usuario.correo);
     localStorage.setItem('foto', usuario.foto || '');
@@ -49,5 +67,9 @@ export class AuthService {
 
   obtenerUsuarioId(): string {
     return localStorage.getItem('usuarioId') || '';
+  }
+
+  obtenerFoto(): string {
+    return localStorage.getItem('foto') || '';
   }
 }

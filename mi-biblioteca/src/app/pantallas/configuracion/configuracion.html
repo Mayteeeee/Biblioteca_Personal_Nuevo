@@ -12,10 +12,14 @@
     <div class="bloque-perfil-superior">
       <div class="zona-foto-avatar">
         <div class="circulo-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <img *ngIf="foto" [src]="foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+          <svg *ngIf="!foto" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
         </div>
-        <button type="button" class="btn-cambiar-foto">cambiar foto</button>
       </div>
+
       <div class="zona-inputs-cortos">
         <div class="grupo-campo">
           <label class="etiqueta-label">Nombre</label>
@@ -23,16 +27,15 @@
           <div style="display:flex; gap:10px;">
             <input
               type="text"
-              [value]="usuario"
+              [(ngModel)]="usuario"
+              name="usuario"
               [readonly]="!editandoUsuario">
 
             <button
               type="button"
               class="boton-morado"
               (click)="toggleUsuario()">
-
-              {{ editandoUsuario ? 'Guardar' : 'Editar' }}
-
+              {{ editandoUsuario ? 'Listo' : 'Editar' }}
             </button>
           </div>
         </div>
@@ -43,47 +46,68 @@
           <div style="display:flex; gap:10px;">
             <input
               type="email"
-              [value]="correo"
+              [(ngModel)]="correo"
+              name="correo"
               [readonly]="!editandoCorreo">
 
             <button
               type="button"
               class="boton-morado"
               (click)="toggleCorreo()">
-
-              {{ editandoCorreo ? 'Guardar' : 'Editar' }}
-
+              {{ editandoCorreo ? 'Listo' : 'Editar' }}
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Biografía</label>
-      <textarea class="area-texto-local" placeholder="Escribe algo sobre ti..."></textarea>
+
+    <div class="contenedor-accion-guardar">
+      <button type="button" class="boton-morado" (click)="guardarCambios()">
+        Guardar cambios
+      </button>
     </div>
   </div>
 
   <div *ngIf="pestanaActiva === 'preferencias'">
     <div class="grupo-campo ancho-completo">
       <label class="etiqueta-label">Idioma de la aplicación</label>
-      <input type="text" class="campo-texto-local" value="Español (México)">
+      <input type="text" class="campo-texto-local" value="Español (México)" readonly>
     </div>
   </div>
 
   <div *ngIf="pestanaActiva === 'seguridad'">
     <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Contraseña Actual</label>
-      <input type="password" class="campo-texto-local" placeholder="********">
+      <label class="etiqueta-label">Contraseña actual</label>
+      <input
+        type="password"
+        class="campo-texto-local"
+        placeholder="Contraseña actual"
+        [(ngModel)]="passwordAnterior"
+        name="passwordAnterior">
     </div>
-    <button type="button" class="boton-morado" style="margin-bottom: 15px;" (click)="irA('nueva-contra')">
-      Cambiar Contraseña
-    </button>
-  </div>
 
-  <div class="contenedor-accion-guardar">
-    <button type="button" class="boton-morado" (click)="guardarCambios()">
-      Guardar cambios
+    <div class="grupo-campo ancho-completo">
+      <label class="etiqueta-label">Nueva contraseña</label>
+      <input
+        type="password"
+        class="campo-texto-local"
+        placeholder="Nueva contraseña"
+        [(ngModel)]="passwordNuevo"
+        name="passwordNuevo">
+    </div>
+
+    <div class="grupo-campo ancho-completo">
+      <label class="etiqueta-label">Confirmar nueva contraseña</label>
+      <input
+        type="password"
+        class="campo-texto-local"
+        placeholder="Confirmar nueva contraseña"
+        [(ngModel)]="confirmarPassword"
+        name="confirmarPassword">
+    </div>
+
+    <button type="button" class="boton-morado" style="margin-bottom: 15px;" (click)="cambiarPassword()">
+      Cambiar contraseña
     </button>
   </div>
 
@@ -93,29 +117,30 @@
       class="boton-morado"
       style="background:#e74c3c; width:100%;"
       (click)="cerrarSesion()">
-
       Cerrar sesión
-
     </button>
   </div>
 
   <div class="nav-inferior">
-      <div class="nav-item">
-        <div class="nav-icono" routerLink="/panelprincipal">🏠</div>
-        <span class="nav-texto">Inicio</span>
-      </div>
-      <div class="nav-item">
-        <div class="nav-icono" routerLink="/mislibros">📚</div>
-        <span class="nav-texto">Mis libros</span>
-      </div>
-      <div class="nav-item">
-        <div class="nav-icono" routerLink="/prestamos">🔖</div>
-        <span class="nav-texto">Préstamos</span>
-      </div>
-      <div class="nav-item">
-        <div class="nav-icono" routerLink="/configuracion">👤</div>
-        <span class="nav-texto">Perfil</span>
-      </div>
+    <div class="nav-item">
+      <div class="nav-icono" routerLink="/panelprincipal">🏠</div>
+      <span class="nav-texto">Inicio</span>
     </div>
+
+    <div class="nav-item">
+      <div class="nav-icono" routerLink="/mislibros">📚</div>
+      <span class="nav-texto">Mis libros</span>
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-icono" routerLink="/prestamos">🔖</div>
+      <span class="nav-texto">Préstamos</span>
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-icono" routerLink="/configuracion">👤</div>
+      <span class="nav-texto">Perfil</span>
+    </div>
+  </div>
 
 </div>

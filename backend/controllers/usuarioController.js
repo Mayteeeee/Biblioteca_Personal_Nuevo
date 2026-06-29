@@ -1,6 +1,5 @@
 const Usuario = require('../models/Usuario');
 
-// Función para registrar un usuario nuevo
 const registrarUsuario = async (req, res) => {
     try {
         const { nombre, correo, password, foto } = req.body;
@@ -20,7 +19,6 @@ const registrarUsuario = async (req, res) => {
     }
 };
 
-// Función para el Login de usuarios
 const loginUsuario = async (req, res) => {
     try {
         const { correo, password } = req.body;
@@ -41,7 +39,6 @@ const loginUsuario = async (req, res) => {
     }
 };
 
-// Función para obtener el perfil de un usuario por ID
 const obtenerPerfil = async (req, res) => {
     try {
         const { id } = req.params;
@@ -56,7 +53,6 @@ const obtenerPerfil = async (req, res) => {
     }
 };
 
-// Función para editar el perfil del usuario (nombre, correo, foto)
 const editarPerfil = async (req, res) => {
     try {
         const { id } = req.params;
@@ -76,24 +72,20 @@ const editarPerfil = async (req, res) => {
     }
 };
 
-// Función para cambiar la contraseña verificando la anterior
 const cambiarPassword = async (req, res) => {
     try {
         const { id } = req.params;
         const { passwordAnterior, passwordNuevo } = req.body;
 
-        // 1. Buscar al usuario por ID
         const usuario = await Usuario.findById(id);
         if (!usuario) {
             return res.status(404).json({ msg: "Usuario no encontrado" });
         }
 
-        // 2. Verificar que la contraseña anterior sea correcta
         if (usuario.password !== passwordAnterior) {
             return res.status(400).json({ msg: "La contraseña anterior es incorrecta" });
         }
 
-        // 3. Asignar y guardar la nueva contraseña
         usuario.password = passwordNuevo;
         await usuario.save();
 
@@ -104,7 +96,6 @@ const cambiarPassword = async (req, res) => {
     }
 };
 
-// Exportamos las cinco funciones finales
 module.exports = {
     registrarUsuario,
     loginUsuario,

@@ -18,11 +18,11 @@ const usuarioSchema = new mongoose.Schema({
     },
     foto: {
         type: String,
-        default: "" // Puede ser URL o Base64
+        default: "" 
     },
     fechaRegistro: {
         type: Date,
-        default: Date.now // Se genera automáticamente la fecha actual
+        default: Date.now 
     }
 });
 
