@@ -40,7 +40,15 @@
             [routerLink]="['/detalleslibro', libro._id || libro.id]"
             style="cursor: pointer;"
           >
-            <div class="icono">📖</div>
+            <div class="icono">
+            <img
+              *ngIf="libro.imagen"
+              [src]="libro.imagen"
+              alt="Portada"
+              style="width: 45px; height: 60px; object-fit: cover; border-radius: 6px;">
+
+            <span *ngIf="!libro.imagen">📖</span>
+          </div>
 
             <div class="info">
               <h3>{{ libro.titulo }}</h3>

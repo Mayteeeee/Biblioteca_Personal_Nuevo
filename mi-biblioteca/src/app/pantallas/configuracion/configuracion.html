@@ -1,125 +1,138 @@
-<div class="tarjeta-pantalla">
+<div class="config-page">
 
-  <h1 class="titulo-seccion">Configuración</h1>
+  <h1 class="titulo-config">Configuración</h1>
 
-  <div class="contenedor-tabs-config">
-    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'perfil'" (click)="cambiarPestana('perfil')">Perfil</button>
-    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'preferencias'" (click)="cambiarPestana('preferencias')">Prefe..</button>
-    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'seguridad'" (click)="cambiarPestana('seguridad')">Seguridad</button>
+  <div class="tabs-config">
+    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'perfil'" (click)="cambiarPestana('perfil')">
+      Perfil
+    </button>
+
+    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'preferencias'" (click)="cambiarPestana('preferencias')">
+      Preferencias
+    </button>
+
+    <button class="tab-config-btn" [class.activo]="pestanaActiva === 'seguridad'" (click)="cambiarPestana('seguridad')">
+      Seguridad
+    </button>
   </div>
 
-  <div *ngIf="pestanaActiva === 'perfil'">
-    <div class="bloque-perfil-superior">
-      <div class="zona-foto-avatar">
-        <div class="circulo-avatar">
-          <img *ngIf="foto" [src]="foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
-          <svg *ngIf="!foto" viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="1.5">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </div>
+  <div class="config-card" *ngIf="pestanaActiva === 'perfil'">
+
+    <div class="avatar-section">
+      <div class="avatar-circle">
+        <img *ngIf="foto" [src]="foto" alt="Foto de perfil">
+
+        <svg *ngIf="!foto" viewBox="0 0 24 24" fill="none" stroke="#5d24b3" stroke-width="1.8">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
       </div>
 
-      <div class="zona-inputs-cortos">
-        <div class="grupo-campo">
-          <label class="etiqueta-label">Nombre</label>
+      <label for="fotoPerfil" class="btn-foto">
+        Cambiar foto
+      </label>
 
-          <div style="display:flex; gap:10px;">
-            <input
-              type="text"
-              [(ngModel)]="usuario"
-              name="usuario"
-              [readonly]="!editandoUsuario">
-
-            <button
-              type="button"
-              class="boton-morado"
-              (click)="toggleUsuario()">
-              {{ editandoUsuario ? 'Listo' : 'Editar' }}
-            </button>
-          </div>
-        </div>
-
-        <div class="grupo-campo">
-          <label class="etiqueta-label">Correo</label>
-
-          <div style="display:flex; gap:10px;">
-            <input
-              type="email"
-              [(ngModel)]="correo"
-              name="correo"
-              [readonly]="!editandoCorreo">
-
-            <button
-              type="button"
-              class="boton-morado"
-              (click)="toggleCorreo()">
-              {{ editandoCorreo ? 'Listo' : 'Editar' }}
-            </button>
-          </div>
-        </div>
-      </div>
+      <input
+        id="fotoPerfil"
+        type="file"
+        accept="image/*"
+        style="display: none;"
+        (change)="cambiarFoto($event)">
     </div>
 
-    <div class="contenedor-accion-guardar">
-      <button type="button" class="boton-morado" (click)="guardarCambios()">
+    <div class="form-section">
+
+      <div class="grupo-campo">
+        <label>Nombre</label>
+
+        <div class="input-editable">
+          <input
+            type="text"
+            [(ngModel)]="usuario"
+            name="usuario"
+            [readonly]="!editandoUsuario"
+            (input)="verificarCambios()">
+
+          <button type="button" (click)="toggleUsuario()">
+            {{ editandoUsuario ? '✔' : '✎' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="grupo-campo">
+        <label>Correo</label>
+
+        <div class="input-editable">
+          <input
+            type="email"
+            [(ngModel)]="correo"
+            name="correo"
+            [readonly]="!editandoCorreo"
+            (input)="verificarCambios()">
+
+          <button type="button" (click)="toggleCorreo()">
+            {{ editandoCorreo ? '✔' : '✎' }}
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn-guardar"
+        [disabled]="!cambiosPerfil"
+        [class.deshabilitado]="!cambiosPerfil"
+        (click)="guardarCambios()">
         Guardar cambios
       </button>
+
     </div>
   </div>
 
-  <div *ngIf="pestanaActiva === 'preferencias'">
+  <div class="config-card simple-card" *ngIf="pestanaActiva === 'preferencias'">
     <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Idioma de la aplicación</label>
-      <input type="text" class="campo-texto-local" value="Español (México)" readonly>
+      <label>Idioma de la aplicación</label>
+      <input type="text" value="Español (México)" readonly>
     </div>
   </div>
 
-  <div *ngIf="pestanaActiva === 'seguridad'">
+  <div class="config-card simple-card" *ngIf="pestanaActiva === 'seguridad'">
+
     <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Contraseña actual</label>
+      <label>Contraseña actual</label>
       <input
         type="password"
-        class="campo-texto-local"
-        placeholder="Contraseña actual"
+        placeholder="Escribe tu contraseña actual"
         [(ngModel)]="passwordAnterior"
         name="passwordAnterior">
     </div>
 
     <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Nueva contraseña</label>
+      <label>Nueva contraseña</label>
       <input
         type="password"
-        class="campo-texto-local"
-        placeholder="Nueva contraseña"
+        placeholder="Escribe la nueva contraseña"
         [(ngModel)]="passwordNuevo"
         name="passwordNuevo">
     </div>
 
     <div class="grupo-campo ancho-completo">
-      <label class="etiqueta-label">Confirmar nueva contraseña</label>
+      <label>Confirmar nueva contraseña</label>
       <input
         type="password"
-        class="campo-texto-local"
-        placeholder="Confirmar nueva contraseña"
+        placeholder="Confirma la nueva contraseña"
         [(ngModel)]="confirmarPassword"
         name="confirmarPassword">
     </div>
 
-    <button type="button" class="boton-morado" style="margin-bottom: 15px;" (click)="cambiarPassword()">
+    <button type="button" class="btn-guardar" (click)="cambiarPassword()">
       Cambiar contraseña
     </button>
+
   </div>
 
-  <div style="margin-top:20px;">
-    <button
-      type="button"
-      class="boton-morado"
-      style="background:#e74c3c; width:100%;"
-      (click)="cerrarSesion()">
-      Cerrar sesión
-    </button>
-  </div>
+  <button type="button" class="btn-cerrar" (click)="cerrarSesion()">
+    Cerrar sesión
+  </button>
 
   <div class="nav-inferior">
     <div class="nav-item">
@@ -137,7 +150,7 @@
       <span class="nav-texto">Préstamos</span>
     </div>
 
-    <div class="nav-item">
+    <div class="nav-item active">
       <div class="nav-icono" routerLink="/configuracion">👤</div>
       <span class="nav-texto">Perfil</span>
     </div>

@@ -1,7 +1,17 @@
 <div class="app-contenedor">
   <div class="tarjeta-pantalla">
     
-    <header class="header-pantalla">
+    <header class="header-pantalla" style="display:flex; align-items:center; gap:12px;">
+      <div style="width:48px; height:48px; border-radius:50%; background:#efe5ff; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+        <img
+          *ngIf="fotoUsuario"
+          [src]="fotoUsuario"
+          alt="Foto de perfil"
+          style="width:100%; height:100%; object-fit:cover;">
+
+        <span *ngIf="!fotoUsuario" style="font-size:24px;">👤</span>
+      </div>
+
       <h2>¡Hola, {{ nombreUsuario }}!</h2>
     </header>
 
@@ -37,7 +47,15 @@
       <div class="lista-lecturas">
         
         <div class="item-libro" *ngFor="let libro of lecturasRecientes">
-          <div class="portada-libro portada-azul"></div>
+          <div class="portada-libro portada-azul">
+            <img
+              *ngIf="libro.imagen"
+              [src]="libro.imagen"
+              alt="Portada"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+
+            <span *ngIf="!libro.imagen">📖</span>
+          </div>
 
           <div class="info-libro">
             <h4>{{ libro.titulo }}</h4>

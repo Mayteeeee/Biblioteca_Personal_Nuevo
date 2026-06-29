@@ -18,6 +18,10 @@ export class ConfiguracionComponent implements OnInit {
   correo: string = '';
   foto: string = '';
 
+  usuarioOriginal: string = '';
+  correoOriginal: string = '';
+  fotoOriginal: string = '';
+
   pestanaActiva: string = 'perfil';
 
   passwordAnterior: string = '';
@@ -26,6 +30,7 @@ export class ConfiguracionComponent implements OnInit {
 
   editandoUsuario: boolean = false;
   editandoCorreo: boolean = false;
+  cambiosPerfil: boolean = false;
 
   constructor(
     private router: Router,
@@ -55,9 +60,17 @@ export class ConfiguracionComponent implements OnInit {
         this.correo = data.correo || this.correo;
         this.foto = data.foto || this.foto;
 
+        this.usuarioOriginal = this.usuario;
+        this.correoOriginal = this.correo;
+        this.fotoOriginal = this.foto;
+
+        this.cambiosPerfil = false;
         this.cdr.detectChanges();
       },
       error: () => {
+        this.usuarioOriginal = this.usuario;
+        this.correoOriginal = this.correo;
+        this.fotoOriginal = this.foto;
         this.cdr.detectChanges();
       }
     });
@@ -69,13 +82,49 @@ export class ConfiguracionComponent implements OnInit {
 
   toggleUsuario(): void {
     this.editandoUsuario = !this.editandoUsuario;
+    this.verificarCambios();
   }
 
   toggleCorreo(): void {
     this.editandoCorreo = !this.editandoCorreo;
+    this.verificarCambios();
+  }
+
+  verificarCambios(): void {
+    this.cambiosPerfil =
+      this.usuario !== this.usuarioOriginal ||
+      this.correo !== this.correoOriginal ||
+      this.foto !== this.fotoOriginal ||
+      this.editandoUsuario ||
+      this.editandoCorreo;
+  }
+
+  cambiarFoto(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('La imagen es muy grande. Usa una imagen menor a 5 MB.');
+      input.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.foto = reader.result as string;
+      this.cambiosPerfil = true;
+      this.cdr.detectChanges();
+    };
+
+    reader.readAsDataURL(file);
   }
 
   guardarCambios(): void {
+    if (!this.cambiosPerfil) return;
+
     if (!this.usuario.trim()) {
       alert('Escribe tu nombre.');
       return;
@@ -95,8 +144,15 @@ export class ConfiguracionComponent implements OnInit {
     this.authService.editarPerfil(this.usuarioId, datos).subscribe({
       next: (respuesta) => {
         this.authService.actualizarDatosSesion(respuesta.usuario);
+
+        this.usuarioOriginal = this.usuario;
+        this.correoOriginal = this.correo;
+        this.fotoOriginal = this.foto;
+
         this.editandoUsuario = false;
         this.editandoCorreo = false;
+        this.cambiosPerfil = false;
+
         alert('Perfil actualizado correctamente.');
         this.cdr.detectChanges();
       },

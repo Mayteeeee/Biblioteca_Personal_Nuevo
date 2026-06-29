@@ -16,6 +16,7 @@ import { Libro } from '../../models/libro.model';
 export class PanelprincipalComponent implements OnInit {
 
   nombreUsuario: string = 'Usuario';
+  fotoUsuario: string = '';
 
   libros: Libro[] = [];
   lecturasRecientes: Libro[] = [];
@@ -32,6 +33,7 @@ export class PanelprincipalComponent implements OnInit {
 
   ngOnInit(): void {
     this.nombreUsuario = this.authService.obtenerUsuario() || 'Usuario';
+    this.fotoUsuario = this.authService.obtenerFoto() || '';
     this.obtenerResumen();
   }
 
@@ -43,6 +45,7 @@ export class PanelprincipalComponent implements OnInit {
         this.totalLeidos = this.libros.filter(
           libro => libro.estado === 'leído' || libro.estado === 'favorito'
         ).length;
+
         this.totalPorLeer = this.libros.filter(libro => libro.estado === 'por leer').length;
         this.totalPrestados = this.libros.filter(libro => libro.estadoPrestamo === 'prestado').length;
 
