@@ -27,6 +27,10 @@ const PrestamoSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  fechaDevueltoReal: {
+    type: Date,
+    default: null
+  },
   notas: {
     type: String,
     default: ''

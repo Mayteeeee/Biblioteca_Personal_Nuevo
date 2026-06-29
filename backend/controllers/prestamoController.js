@@ -26,7 +26,11 @@ exports.registrarPrestamo = async (req, res) => {
 
 exports.obtenerPrestamos = async (req, res) => {
   try {
-    const prestamos = await Prestamo.find()
+    const { usuarioId } = req.query;
+
+    const filtro = usuarioId ? { usuarioId } : {};
+
+    const prestamos = await Prestamo.find(filtro)
       .populate('libroId')
       .populate('usuarioId');
 
@@ -43,14 +47,14 @@ exports.obtenerPrestamosPorLibro = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const historialLibro = await Prestamo.find({ libroId: id })
+    const prestamos = await Prestamo.find({ libroId: id })
       .populate('libroId')
       .populate('usuarioId');
 
-    res.json(historialLibro);
+    res.json(prestamos);
   } catch (error) {
     res.status(500).json({
-      error: 'Error al obtener el historial del libro',
+      error: 'Error al obtener préstamos del libro',
       detalle: error.message
     });
   }
@@ -62,7 +66,10 @@ exports.marcarDevolucion = async (req, res) => {
 
     const prestamoActualizado = await Prestamo.findByIdAndUpdate(
       id,
-      { devuelto: true },
+      {
+        devuelto: true,
+        fechaDevueltoReal: new Date()
+      },
       { new: true }
     );
 

@@ -6,46 +6,81 @@
     <button 
       class="tab-btn" 
       [class.activo]="pestanaActiva === 'activos'" 
-      (click)="cambiarPestana('activos')"
-    >Activos</button>
+      (click)="cambiarPestana('activos')">
+      Activos
+    </button>
     
     <button 
       class="tab-btn" 
       [class.activo]="pestanaActiva === 'historial'" 
-      (click)="cambiarPestana('historial')"
-    >Historial</button>
+      (click)="cambiarPestana('historial')">
+      Historial
+    </button>
   </div>
 
   <div class="lista-libros" *ngIf="pestanaActiva === 'activos'">
-    <div class="tarjeta-libro">
+
+    <p *ngIf="datosCargados && prestamosActivos.length === 0">
+      No tienes préstamos activos.
+    </p>
+
+    <div class="tarjeta-libro" *ngFor="let prestamo of prestamosActivos">
       <div class="caratula-libro portada-verde"></div>
+
       <div class="info-libro">
-        <h3 class="titulo-libro">1984</h3>
-        <p class="detalle-prestamo">Prestado a: <span>Maria Lopez</span></p>
-        <p class="fecha-prestamo">10/05/2024</p>
+        <h3 class="titulo-libro">
+          {{ prestamo.libroId?.titulo || 'Libro no disponible' }}
+        </h3>
+
+        <p class="detalle-prestamo">
+          Prestado a: <span>{{ prestamo.persona }}</span>
+        </p>
+
+        <p class="fecha-prestamo">
+          Devolución: {{ prestamo.fechaDevolucion | date:'dd/MM/yyyy' }}
+        </p>
+
+        <p class="fecha-prestamo" *ngIf="prestamo.notas">
+          {{ prestamo.notas }}
+        </p>
       </div>
-      <span class="etiqueta-estado pendiente">Pendiente</span>
+
+      <button 
+        type="button"
+        class="etiqueta-estado pendiente"
+        (click)="marcarComoDevuelto(prestamo._id)">
+        Marcar como devuelto
+      </button>
     </div>
   </div>
 
   <div class="lista-libros" *ngIf="pestanaActiva === 'historial'">
-    <div class="tarjeta-libro">
-      <div class="caratula-libro portada-azul"></div> 
-      <div class="info-libro">
-        <h3 class="titulo-libro">Misery</h3>
-        <p class="detalle-prestamo">Devuelto el: <span>12/03/2024</span></p>
-        <p class="fecha-prestamo">Ana Torres</p>
-      </div>
-      <span class="etiqueta-estado devuelto">Entregado</span>
-    </div>
 
-    <div class="tarjeta-libro">
-      <div class="caratula-libro portada-verde"></div>
+    <p *ngIf="datosCargados && prestamosHistorial.length === 0">
+      No tienes préstamos devueltos.
+    </p>
+
+    <div class="tarjeta-libro" *ngFor="let prestamo of prestamosHistorial">
+      <div class="caratula-libro portada-azul"></div>
+
       <div class="info-libro">
-        <h3 class="titulo-libro">El principito</h3>
-        <p class="detalle-prestamo">Devuelto el: <span>20/02/2024</span></p>
-        <p class="fecha-prestamo">Juan Lopez</p>
+        <h3 class="titulo-libro">
+          {{ prestamo.libroId?.titulo || 'Libro no disponible' }}
+        </h3>
+
+        <p class="detalle-prestamo">
+          Devuelto por: <span>{{ prestamo.persona }}</span>
+        </p>
+
+        <p class="fecha-prestamo">
+          Fecha planeada: {{ prestamo.fechaDevolucion | date:'dd/MM/yyyy' }}
+        </p>
+
+        <p class="fecha-prestamo">
+          Devuelto realmente: {{ prestamo.fechaDevueltoReal | date:'dd/MM/yyyy' }}
+        </p>
       </div>
+
       <span class="etiqueta-estado devuelto">Entregado</span>
     </div>
   </div>
@@ -55,18 +90,22 @@
       <div class="nav-icono">🏠</div>
       <span class="nav-texto">Inicio</span>
     </div>
+
     <div class="nav-item" routerLink="/mislibros">
       <div class="nav-icono">📖</div>
       <span class="nav-texto">Mis libros</span>
     </div>
-    <div class="nav-item" routerLink="/registrarlibro">
+
+    <div class="nav-item" routerLink="/agregareditar">
       <div class="nav-icono">➕</div>
       <span class="nav-texto">Agregar</span>
     </div>
+
     <div class="nav-item activo" routerLink="/prestamos">
       <div class="nav-icono">🔖</div>
       <span class="nav-texto">Préstamos</span>
     </div>
+
     <div class="nav-item">
       <div class="nav-icono" routerLink="/configuracion">👤</div>
       <span class="nav-texto">Perfil</span>

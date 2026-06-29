@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ export class PrestamosService {
 
   private apiUrl = 'http://localhost:4000/prestamos';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   obtenerPrestamosPorLibro(idLibro: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/libro/${idLibro}`);
@@ -20,7 +24,8 @@ export class PrestamosService {
   }
 
   obtenerPrestamos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const usuarioId = this.authService.obtenerUsuarioId();
+    return this.http.get<any[]>(`${this.apiUrl}?usuarioId=${usuarioId}`);
   }
 
   marcarDevolucion(idPrestamo: string): Observable<any> {

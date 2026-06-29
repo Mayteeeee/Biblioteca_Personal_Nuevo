@@ -2,7 +2,7 @@
   <div class="tarjeta-pantalla">
     
     <header class="header-pantalla">
-      <h2>¡Hola, Usuario!</h2>
+      <h2>¡Hola, {{ nombreUsuario }}!</h2>
     </header>
 
     <section class="seccion-panel">
@@ -10,17 +10,17 @@
       <div class="contenedor-resumen">
         
         <div class="tarjeta-resumen tarjeta-leido">
-          <span class="numero-resumen">28</span>
+          <span class="numero-resumen">{{ totalLeidos }}</span>
           <span class="etiqueta-resumen">Leído</span>
         </div>
         
         <div class="tarjeta-resumen tarjeta-por-leer">
-          <span class="numero-resumen">15</span>
+          <span class="numero-resumen">{{ totalPorLeer }}</span>
           <span class="etiqueta-resumen">Por leer</span>
         </div>
         
         <div class="tarjeta-resumen tarjeta-prestado">
-          <span class="numero-resumen">3</span>
+          <span class="numero-resumen">{{ totalPrestados }}</span>
           <span class="etiqueta-resumen">Prestado</span>
         </div>
         
@@ -29,33 +29,27 @@
 
     <section class="seccion-panel">
       <h3 class="titulo-seccion">Lecturas recientes</h3>
+
+      <p *ngIf="lecturasRecientes.length === 0">
+        Aún no tienes libros registrados.
+      </p>
+
       <div class="lista-lecturas">
         
-        <div class="item-libro">
+        <div class="item-libro" *ngFor="let libro of lecturasRecientes">
           <div class="portada-libro portada-azul"></div>
-          <div class="info-libro">
-            <h4>El principito</h4>
-            <div class="estrellas">★★★★☆</div>
-          </div>
-          <span class="badge badge-leido">Leído</span>
-        </div>
 
-        <div class="item-libro">
-          <div class="portada-libro portada-celeste"></div>
           <div class="info-libro">
-            <h4>1980</h4>
-            <div class="estrellas">★★★☆☆</div>
+            <h4>{{ libro.titulo }}</h4>
+            <div class="estrellas">{{ obtenerEstrellas(libro.calificacion) }}</div>
           </div>
-          <span class="badge badge-leido">Leído</span>
-        </div>
 
-        <div class="item-libro">
-          <div class="portada-libro portada-morada"></div>
-          <div class="info-libro">
-            <h4>Hábitos</h4>
-            <div class="estrellas">★★☆☆☆</div>
-          </div>
-          <span class="badge badge-por-leer">Por leer</span>
+          <span 
+            class="badge"
+            [class.badge-leido]="libro.estado === 'leído'"
+            [class.badge-por-leer]="libro.estado === 'por leer'">
+            {{ libro.estado }}
+          </span>
         </div>
 
       </div>
@@ -90,5 +84,3 @@
 
   </div>
 </div>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
