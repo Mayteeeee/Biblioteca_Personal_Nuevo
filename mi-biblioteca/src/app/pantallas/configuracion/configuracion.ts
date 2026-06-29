@@ -187,11 +187,17 @@ export class ConfiguracionComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (error) => {
+        this.passwordAnterior = '';
+        this.passwordNuevo = '';
+        this.confirmarPassword = '';
+
         if (error.status === 400) {
           alert('La contraseña actual es incorrecta.');
         } else {
           alert('No fue posible cambiar la contraseña.');
         }
+
+        this.cdr.detectChanges();
       }
     });
   }
