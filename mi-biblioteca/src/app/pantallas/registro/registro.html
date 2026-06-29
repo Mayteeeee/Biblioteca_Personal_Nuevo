@@ -1,43 +1,63 @@
 <div class="app-contenedor">
-    <div class="tarjeta-pantalla">
-        <button class="btn-regresar" routerLink="/login" aria-label="Regresar al login" title="Regresar">
-            <i class="bi bi-arrow-left"></i>
+  <div class="tarjeta-pantalla">
+    <button class="btn-regresar" routerLink="/login" aria-label="Regresar al login" title="Regresar">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <h2>Crear cuenta</h2>
+
+    <form class="formulario" (ngSubmit)="registrarUsuario()">
+      <div class="grupo-input">
+        <span class="icono">👤</span>
+        <input 
+          type="text" 
+          placeholder="Nombre completo" 
+          [(ngModel)]="nombre"
+          name="nombre"
+          required>
+      </div>
+
+      <div class="grupo-input">
+        <span class="icono">✉️</span>
+        <input 
+          type="email" 
+          placeholder="Correo electrónico"
+          [(ngModel)]="correo"
+          name="correo"
+          required>
+      </div>
+
+      <div class="grupo-input">
+        <span class="icono">🔒</span>
+        <input 
+          [type]="mostrarPassword ? 'text' : 'password'" 
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          required>
+        <button type="button" class="btn-eye" (click)="togglePassword()">
+          {{ mostrarPassword ? '🙈' : '👁️' }}
         </button>
+      </div>
 
-        <h2>Crear cuenta</h2>
+      <div class="grupo-input">
+        <span class="icono">🔒</span>
+        <input 
+          [type]="mostrarConfirmarPassword ? 'text' : 'password'" 
+          placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarPassword"
+          name="confirmarPassword"
+          required>
+        <button type="button" class="btn-eye" (click)="toggleConfirmarPassword()">
+          {{ mostrarConfirmarPassword ? '🙈' : '👁️' }}
+        </button>
+      </div>
 
-        <form class="formulario" (submit)="registrarUsuario($event)">
-            <div class="grupo-input">
-                <span class="icono">👤</span>
-                <input type="text" placeholder="Nombre completo" required />
-            </div>
+      <button type="submit" class="boton-morado">Registrarse</button>
+    </form>
 
-            <div class="grupo-input">
-                <span class="icono">✉️</span>
-                <input type="email" placeholder="Correo electrónico" required />
-            </div>
-
-            <div class="grupo-input">
-                <span class="icono">🔒</span>
-                <input [type]="mostrarPassword ? 'text' : 'password'" placeholder="Contraseña" required />
-                <button type="button" class="btn-eye" (click)="togglePassword()">
-                    {{ mostrarPassword ? '🙈' : '👁️' }}
-                </button>
-            </div>
-
-            <div class="grupo-input">
-                <span class="icono">🔒</span>
-                <input [type]="mostrarConfirmarPassword ? 'text' : 'password'" placeholder="Confirmar contraseña" required />
-                <button type="button" class="btn-eye" (click)="toggleConfirmarPassword()">
-                    {{ mostrarConfirmarPassword ? '🙈' : '👁️' }}
-                </button>
-            </div>
-
-            <button type="submit" class="boton-morado" (click)="registrarUsuario($event)">Registrarse</button>
-        </form>
-
-        <p class="login-link">
-            ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
-        </p>
-    </div>
+    <p class="login-link">
+      ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+    </p>
+  </div>
 </div>

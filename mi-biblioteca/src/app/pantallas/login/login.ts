@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
-
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,6 +12,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
+  correo: string = '';
+  password: string = '';
   mostrarPassword: boolean = false;
 
   constructor(
@@ -25,7 +26,24 @@ export class LoginComponent {
   }
 
   iniciarSesion(): void {
-    this.authService.iniciarSesion();
-    this.router.navigate(['/panelprincipal']);
+    if (!this.correo || !this.password) {
+      alert('Escribe correo y contraseña');
+      return;
+    }
+
+    const datos = {
+      correo: this.correo,
+      password: this.password
+    };
+
+    this.authService.loginUsuario(datos).subscribe({
+      next: (respuesta) => {
+        this.authService.guardarSesion(respuesta.usuario);
+        this.router.navigate(['/panelprincipal']);
+      },
+      error: () => {
+        alert('Correo o contraseña incorrectos');
+      }
+    });
   }
 }

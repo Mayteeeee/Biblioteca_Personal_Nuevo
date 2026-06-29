@@ -46,12 +46,13 @@
 
       <div class="status-badge-container">
         <span class="status-badge">{{ libro.estado || 'Sin estado' }}</span>
+        <span class="status-badge">{{ libro.estadoPrestamo || 'disponible' }}</span>
       </div>
 
       <button
         type="button"
         class="boton-morado boton-editar"
-        [routerLink]="['/agregareditar', libro.id || idLibro]">
+        [routerLink]="['/agregareditar', libro._id || libro.id || idLibro]">
         ✏️ Editar libro
       </button>
     </div>
@@ -116,8 +117,13 @@
           </div>
 
           <div class="detalle-fila">
-            <span class="detalle-label">Estado</span>
+            <span class="detalle-label">Estado de lectura</span>
             <span class="detalle-valor">{{ libro.estado || 'Sin estado' }}</span>
+          </div>
+
+          <div class="detalle-fila">
+            <span class="detalle-label">Estado de préstamo</span>
+            <span class="detalle-valor">{{ libro.estadoPrestamo || 'disponible' }}</span>
           </div>
 
           <div class="detalle-fila">
@@ -152,17 +158,35 @@
           <span class="alert-icon">📊</span>
           <h4>Historial de préstamos</h4>
 
-          <div class="prestamo-item">
-            <p><strong>Estado:</strong> Sin préstamos registrados</p>
+          <p><strong>Estado actual:</strong> {{ libro.estadoPrestamo || 'disponible' }}</p>
+
+          <div *ngIf="historialPrestamos.length === 0" class="prestamo-item">
             <p class="placeholder-text">
-              Cuando registres un préstamo de este libro, aquí aparecerá su historial.
+              Este libro todavía no tiene préstamos registrados.
+            </p>
+          </div>
+
+          <div *ngFor="let prestamo of historialPrestamos" class="prestamo-item">
+            <p><strong>Prestado a:</strong> {{ prestamo.persona }}</p>
+            <p><strong>Correo:</strong> {{ prestamo.correo }}</p>
+            <p><strong>Fecha de préstamo:</strong> {{ prestamo.fechaPrestamo | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Fecha de devolución:</strong> {{ prestamo.fechaDevolucion | date:'dd/MM/yyyy' }}</p>
+
+            <p>
+              <strong>Estado:</strong>
+              {{ prestamo.devuelto ? 'Devuelto' : 'Prestado' }}
+            </p>
+
+            <p *ngIf="prestamo.notas">
+              <strong>Notas:</strong> {{ prestamo.notas }}
             </p>
           </div>
 
           <button
             type="button"
             class="boton-morado"
-            [routerLink]="['/registrarlibro']">
+            [routerLink]="['/registrarlibro']"
+            [queryParams]="{ libroId: libro._id || libro.id || idLibro }">
             Registrar préstamo
           </button>
         </div>

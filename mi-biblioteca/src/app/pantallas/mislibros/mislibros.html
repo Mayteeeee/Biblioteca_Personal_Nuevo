@@ -37,7 +37,7 @@
           <div 
             class="libro-card" 
             *ngFor="let libro of librosFiltrados"
-            [routerLink]="['/detalleslibro', libro.id]"
+            [routerLink]="['/detalleslibro', libro._id || libro.id]"
             style="cursor: pointer;"
           >
             <div class="icono">📖</div>

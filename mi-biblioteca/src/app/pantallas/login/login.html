@@ -13,16 +13,23 @@
     <form class="login-form" (ngSubmit)="iniciarSesion()">
       <div class="input-group">
         <span class="input-icon">👤</span>
-        <input type="email" placeholder="Correo electrónico" required>
+        <input 
+          type="email" 
+          placeholder="Correo electrónico" 
+          [(ngModel)]="correo"
+          name="correo"
+          required>
       </div>
 
       <div class="input-group">
         <span class="input-icon">🔒</span>
   
         <input 
-        [type]="mostrarPassword ? 'text' : 'password'" 
-        placeholder="Contraseña" 
-        required>
+          [type]="mostrarPassword ? 'text' : 'password'" 
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          required>
   
         <button 
         type="button" 

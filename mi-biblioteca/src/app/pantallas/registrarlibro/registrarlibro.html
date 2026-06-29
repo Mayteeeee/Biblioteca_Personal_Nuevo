@@ -2,36 +2,64 @@
   <div class="tarjeta-pantalla pantalla-registrar-prestamo">
     
     <header class="header-prestamo">
-      <button class="btn-regresar" routerLink="/prestamos">‹</button>
+      <button class="btn-regresar" [routerLink]="['/detalleslibro', libroId]">‹</button>
       <h2>Registrar préstamo</h2>
     </header>
 
-    <form class="formulario-prestamo">
+    <form class="formulario-prestamo" (ngSubmit)="guardarPrestamo()">
       
       <div class="grupo-input">
         <label><span class="icono-input">👤</span> Persona a quien se presta</label>
-        <input type="text" class="campo-texto" placeholder="Nombre completo" required>
+        <input
+          type="text"
+          class="campo-texto"
+          placeholder="Nombre completo"
+          [(ngModel)]="persona"
+          name="persona"
+          required>
       </div>
 
       <div class="grupo-input">
-        <label><span class="icono-input">✉️</span> Correo electrónico (opcional)</label>
-        <input type="email" class="campo-texto" placeholder="correo@ejemplo.com">
+        <label><span class="icono-input">✉️</span> Correo electrónico</label>
+        <input
+          type="email"
+          class="campo-texto"
+          placeholder="correo@ejemplo.com"
+          [(ngModel)]="correo"
+          name="correo"
+          required>
       </div>
 
       <div class="fila-fechas">
         <div class="grupo-input">
           <label><span class="icono-input">📅</span> Fecha de préstamo</label>
-          <input type="date" class="campo-texto" required>
+          <input
+            type="date"
+            class="campo-texto"
+            [(ngModel)]="fechaPrestamo"
+            name="fechaPrestamo"
+            required>
         </div>
+
         <div class="grupo-input">
           <label><span class="icono-input">📅</span> Fecha de devolución</label>
-          <input type="date" class="campo-texto" required>
+          <input
+            type="date"
+            class="campo-texto"
+            [(ngModel)]="fechaDevolucion"
+            name="fechaDevolucion"
+            required>
         </div>
       </div>
 
       <div class="grupo-input">
-        <label>Notas (opcional)</label>
-        <textarea class="campo-texto area-notas" placeholder="Ej. indicaciones, comentarios, etc."></textarea>
+        <label>Notas</label>
+        <textarea
+          class="campo-texto area-notas"
+          placeholder="Ej. indicaciones, comentarios, etc."
+          [(ngModel)]="notas"
+          name="notas">
+        </textarea>
       </div>
 
       <button type="submit" class="boton-morado">Guardar préstamo</button>
