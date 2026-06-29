@@ -33,104 +33,74 @@ export class MisLibrosComponent implements OnInit {
   }
 
   obtenerLibros(): void {
-
     this.datosCargados = false;
 
     this.librosService.obtenerLibros().subscribe({
-
       next: (data) => {
-
         this.libros = data;
-
         this.filtroActivo = 'todos';
-
         this.aplicarFiltro();
-
         this.datosCargados = true;
-
         this.cdr.detectChanges();
       },
-
       error: () => {
-
         this.libros = [];
         this.librosFiltrados = [];
-
         this.datosCargados = true;
-
         this.cdr.detectChanges();
       }
-
     });
-
   }
 
   cambiarFiltro(filtro: string): void {
-
     this.filtroActivo = filtro;
-
     this.aplicarFiltro();
-
     this.cdr.detectChanges();
-
   }
 
   aplicarFiltro(): void {
-
     let resultado = [...this.libros];
 
     if (this.filtroActivo !== 'todos') {
-
-      resultado = resultado.filter(
-        libro => libro.estado === this.filtroActivo
-      );
-
+      resultado = resultado.filter(libro => libro.estado === this.filtroActivo);
     }
 
     if (this.textoBusqueda.trim() !== '') {
+      const busqueda = this.textoBusqueda.toLowerCase();
 
       resultado = resultado.filter(libro =>
-        libro.titulo.toLowerCase().includes(
-          this.textoBusqueda.toLowerCase()
-        )
+        (libro.titulo || '').toLowerCase().includes(busqueda) ||
+        (libro.autor || '').toLowerCase().includes(busqueda)
       );
-
     }
 
     this.librosFiltrados = resultado;
-
   }
 
-  eliminarLibro(id: string, event: Event): void {
-
+  eliminarLibro(id: string | undefined, event: Event): void {
     event.stopPropagation();
+
+    if (!id) {
+      alert('No se encontró el libro.');
+      return;
+    }
 
     const confirmar = confirm('¿Seguro que quieres eliminar este libro?');
 
     if (!confirmar) return;
 
     this.librosService.eliminarLibro(id).subscribe({
-
       next: () => {
-
         this.libros = this.libros.filter(
-          libro => libro.id !== id
+          libro => (libro._id || libro.id) !== id
         );
 
         this.aplicarFiltro();
-
         this.cdr.detectChanges();
-
       },
-
       error: () => {
-
         alert('No fue posible eliminar el libro.');
-
       }
-
     });
-
   }
-
 }

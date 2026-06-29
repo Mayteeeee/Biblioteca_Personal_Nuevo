@@ -22,8 +22,8 @@
       <div class="categorias-scroll">
         <div class="filtros">
           <span class="chip" [class.active]="filtroActivo === 'todos'" (click)="cambiarFiltro('todos')">Todos</span>
-          <span class="chip" [class.active]="filtroActivo === 'leido'" (click)="cambiarFiltro('leido')">Leídos</span>
-          <span class="chip" [class.active]="filtroActivo === 'porleer'" (click)="cambiarFiltro('porleer')">Por leer</span>
+          <span class="chip" [class.active]="filtroActivo === 'leído'" (click)="cambiarFiltro('leído')">Leídos</span>
+          <span class="chip" [class.active]="filtroActivo === 'por leer'" (click)="cambiarFiltro('por leer')">Por leer</span>
           <span class="chip" [class.active]="filtroActivo === 'favorito'" (click)="cambiarFiltro('favorito')">Favoritos</span>
         </div>
       </div>
@@ -45,12 +45,13 @@
             <div class="info">
               <h3>{{ libro.titulo }}</h3>
               <p>{{ libro.estado }}</p>
+              <small>{{ libro.estadoPrestamo || 'disponible' }}</small>
             </div>
 
             <button
               type="button"
               class="btn-eliminar"
-              (click)="eliminarLibro(libro.id!, $event)">
+              (click)="eliminarLibro(libro._id || libro.id, $event)">
               🗑️
             </button>
           </div>

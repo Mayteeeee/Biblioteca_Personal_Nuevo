@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Libro } from '../models/libro.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,14 @@ export class LibrosService {
 
   private apiUrl = 'http://localhost:4000/libros';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   obtenerLibros(): Observable<Libro[]> {
-    return this.http.get<Libro[]>(this.apiUrl);
+    const usuarioId = this.authService.obtenerUsuarioId();
+    return this.http.get<Libro[]>(`${this.apiUrl}?usuarioId=${usuarioId}`);
   }
 
   obtenerLibroPorId(id: string): Observable<Libro> {
