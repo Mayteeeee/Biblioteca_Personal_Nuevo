@@ -25,7 +25,20 @@
     </p>
 
     <div class="tarjeta-libro" *ngFor="let prestamo of prestamosActivos">
-      <div class="caratula-libro portada-verde"></div>
+      <div class="caratula-libro">
+        <img
+          *ngIf="prestamo.libroId?.imagen"
+          [src]="prestamo.libroId.imagen"
+          alt="Portada del libro"
+          class="imagen-portada">
+
+        <div
+          *ngIf="!prestamo.libroId?.imagen"
+          class="portada-sin-imagen">
+          📖
+        </div>
+
+      </div>
 
       <div class="info-libro">
         <h3 class="titulo-libro">
@@ -61,7 +74,20 @@
     </p>
 
     <div class="tarjeta-libro" *ngFor="let prestamo of prestamosHistorial">
-      <div class="caratula-libro portada-azul"></div>
+      <div class="caratula-libro">
+        <img
+          *ngIf="prestamo.libroId?.imagen"
+          [src]="prestamo.libroId.imagen"
+          alt="Portada del libro"
+          class="imagen-portada">
+
+        <div
+          *ngIf="!prestamo.libroId?.imagen"
+          class="portada-sin-imagen">
+          📖
+        </div>
+
+      </div>
 
       <div class="info-libro">
         <h3 class="titulo-libro">
@@ -94,11 +120,6 @@
     <div class="nav-item" routerLink="/mislibros">
       <div class="nav-icono">📖</div>
       <span class="nav-texto">Mis libros</span>
-    </div>
-
-    <div class="nav-item" routerLink="/registrarlibro">
-      <div class="nav-icono">➕</div>
-      <span class="nav-texto">Agregar</span>
     </div>
 
     <div class="nav-item activo" routerLink="/prestamos">
