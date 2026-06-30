@@ -69,7 +69,8 @@
           <span 
             class="badge"
             [class.badge-leido]="libro.estado === 'leído'"
-            [class.badge-por-leer]="libro.estado === 'por leer'">
+            [class.badge-por-leer]="libro.estado === 'por leer'"
+            [class.badge-favorito]="libro.estado === 'favorito'">
             {{ libro.estado }}
           </span>
         </div>

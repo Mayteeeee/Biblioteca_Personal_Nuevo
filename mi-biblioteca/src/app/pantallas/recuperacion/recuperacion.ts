@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule, RouterLink } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-recuperacion',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule, RouterLink],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './recuperacion.html',
   styleUrl: './recuperacion.css'
 })

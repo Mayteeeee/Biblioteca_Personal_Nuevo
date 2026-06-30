@@ -1,4 +1,3 @@
-/* Estilos generales de las secciones */
 .seccion-panel {
   margin-bottom: 30px;
 }
@@ -10,7 +9,6 @@
   margin-bottom: 15px;
 }
 
-/* Contenedor de las 3 tarjetas de arriba (Flexbox) */
 .contenedor-resumen {
   display: flex;
   justify-content: space-between;
@@ -30,10 +28,9 @@
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-/* Colores basados en tus dibujos */
-.tarjeta-leido { background-color: #7bc17e; }      /* Verde */
-.tarjeta-por-leer { background-color: #e50707; }   /* Naranja */
-.tarjeta-prestado { background-color: #4a75bc; }   /* Azul */
+.tarjeta-leido { background-color: #7bc17e; }      
+.tarjeta-por-leer { background-color: #e50707; }   
+.tarjeta-prestado { background-color: #4a75bc; }   
 
 .numero-resumen {
   font-size: 22px;
@@ -44,12 +41,11 @@
   font-size: 12px;
 }
 
-/* Lista de Lecturas Recientes */
 .lista-lecturas {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 60px; /* Margen para que no tape la barra inferior */
+  margin-bottom: 60px; 
 }
 
 .item-libro {
@@ -68,7 +64,6 @@
   margin-right: 15px;
 }
 
-/* Colores de las portadas simuladas */
 .portada-azul { background-color: #2b579a; }
 .portada-celeste { background-color: #53a7e0; }
 .portada-morada { background-color: #6f42c1; }
@@ -84,11 +79,10 @@
 }
 
 .estrellas {
-  color: #ffc107; /* Color dorado para estrellas */
+  color: #ffc107; 
   font-size: 13px;
 }
 
-/* Etiquetas de estado (Badges) */
 .badge {
   padding: 4px 10px;
   border-radius: 20px;
@@ -106,7 +100,11 @@
   color: #e65100;
 }
 
-/* Barra de Navegación Inferior */
+.badge-favorito {
+  background-color: #efe5ff;
+  color: #5d24b3;
+}
+
 .navbar-inferior {
   position: fixed;
   bottom: 0;
@@ -144,7 +142,7 @@
 }
 
 .nav-item.active {
-  color: #5d24b3; /* Usando tu morado global */
+  color: #5d24b3; 
 }
 
 .nav-item.btn-mas i {
