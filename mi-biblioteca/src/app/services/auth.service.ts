@@ -72,4 +72,12 @@ export class AuthService {
   obtenerFoto(): string {
     return localStorage.getItem('foto') || '';
   }
+
+  enviarCodigoRecuperacion(correo: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/recuperar`, { correo });
+  }
+
+  restablecerPassword(datos: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/restablecer`, datos);
+  }
 }

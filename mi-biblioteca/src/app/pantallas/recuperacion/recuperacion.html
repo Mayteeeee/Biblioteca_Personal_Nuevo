@@ -17,24 +17,19 @@
   <label for="correo">
     Correo electrónico
   </label>
-  
-  <div class="icono-central emoji-gigante">
-    ✉️
-  </div>
-  
+
   <div class="campo-icono">
-    <i class="ti ti-mail icono" aria-hidden="true"></i>
     <input
-      class="campo-texto campo-con-icono"
+      class="campo-texto"
       type="email"
       id="correo"
-      placeholder="ejemplo@correo.com"
+      placeholder="Correo electrónico"
       [(ngModel)]="correo"
     />
   </div>
 
-  <button class="boton-morado" routerLink="/verificacion">
-    Enviar código
+  <button class="boton-morado" type="button" (click)="enviarCodigo()" [disabled]="cargando">
+    {{ cargando ? 'Enviando...' : 'Enviar código' }}
   </button>
 
   <div class="ayuda-correo">

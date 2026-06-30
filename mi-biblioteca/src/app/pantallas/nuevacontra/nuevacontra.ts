@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nuevacontra',
@@ -12,9 +13,10 @@ import { CommonModule } from '@angular/common';
 })
 export class NuevacontraComponent implements OnInit {
   formContra!: FormGroup;
-  
+
   mostrarNueva: boolean = false;
   mostrarConfirmar: boolean = false;
+  cargando: boolean = false;
 
   validaciones = {
     minCaracteres: false,
@@ -26,12 +28,13 @@ export class NuevacontraComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.initFormulario();
-    
+
     this.formContra.get('nuevaContra')?.valueChanges.subscribe((value: string | null) => {
       this.evaluarRequisitos(value || '');
     });
@@ -62,14 +65,54 @@ export class NuevacontraComponent implements OnInit {
   contrasenasCoincidenValidator(g: FormGroup) {
     const nueva = g.get('nuevaContra')?.value;
     const confirmar = g.get('confirmarContra')?.value;
-    return nueva === confirmar ? null : { 'noCoincide': true };
+    return nueva === confirmar ? null : { noCoincide: true };
   }
 
   actualizarContrasena(): void {
-    if (this.formContra.valid) {
-      console.log('Contraseña actualizada con éxito.');
-      this.router.navigate(['/panelprincipal']); 
+    if (this.formContra.invalid) {
+      alert('Completa correctamente los campos.');
+      return;
     }
+
+    const correo = localStorage.getItem('correoRecuperacion');
+    const codigo = localStorage.getItem('codigoRecuperacion');
+
+    if (!correo || !codigo) {
+      alert('Faltan datos de recuperación.');
+      this.router.navigate(['/recuperacion']);
+      return;
+    }
+
+    const datos = {
+      correo,
+      codigo,
+      passwordNuevo: this.formContra.value.nuevaContra
+    };
+
+    this.cargando = true;
+
+    this.authService.restablecerPassword(datos).subscribe({
+      next: () => {
+        this.cargando = false;
+        localStorage.removeItem('correoRecuperacion');
+        localStorage.removeItem('codigoRecuperacion');
+        alert('Contraseña actualizada correctamente.');
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        this.cargando = false;
+        localStorage.removeItem('codigoRecuperacion');
+
+        this.formContra.reset();
+
+        if (error.status === 400) {
+          alert('El código es incorrecto o expiró.');
+          this.router.navigate(['/verificacion']);
+        } else {
+          alert('No fue posible actualizar la contraseña.');
+        }
+      }
+    });
   }
 
   irAlLogin(): void {

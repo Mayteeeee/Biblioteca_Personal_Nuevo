@@ -82,8 +82,8 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="formContra.invalid" class="boton-morado" >
-        Actualizar contraseña
+      <button type="submit" [disabled]="formContra.invalid || cargando" class="boton-morado">
+        {{ cargando ? 'Actualizando...' : 'Actualizar contraseña' }}
       </button>
 
       <div class="contenedor-volver">

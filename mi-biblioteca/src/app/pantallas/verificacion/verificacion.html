@@ -1,4 +1,4 @@
-<div class="mobile-container" class="tarjeta-pantalla">
+<div class="mobile-container tarjeta-pantalla">
   
   <div class="header-navigation">
     <button class="btn-back" routerLink="/login">‹</button>
@@ -14,7 +14,7 @@
     
     <p class="subtitle-text">
       Hemos enviado un código de 6 dígitos a:<br>
-      <strong class="user-email">ejemplo@correo.com</strong>
+      <strong class="user-email">{{ correo || 'tu correo' }}</strong>
     </p>
 
     <div class="lock-illustration">
@@ -22,24 +22,31 @@
     </div>
 
     <div class="code-inputs-container">
-      <input type="text" maxlength="1" class="code-input" placeholder="1" pattern="[0-9]*" inputmode="numeric">
-      <input type="text" maxlength="1" class="code-input" placeholder="2" pattern="[0-9]*" inputmode="numeric">
-      <input type="text" maxlength="1" class="code-input" placeholder="3" pattern="[0-9]*" inputmode="numeric">
-      <input type="text" maxlength="1" class="code-input" placeholder="4" pattern="[0-9]*" inputmode="numeric">
-      <input type="text" maxlength="1" class="code-input" placeholder="5" pattern="[0-9]*" inputmode="numeric">
-      <input type="text" maxlength="1" class="code-input" placeholder="6" pattern="[0-9]*" inputmode="numeric">
+      <input
+        *ngFor="let digito of codigo; let i = index; trackBy: trackByIndex"
+        [id]="'codigo-' + i"
+        type="text"
+        maxlength="1"
+        class="code-input"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        (keydown)="manejarTecla($event, i)">
     </div>
 
-    
+    <button type="button" class="boton-morado" (click)="verificarCodigo()">
+      Verificar código
+    </button>
 
-    <button type="button" routerLink="/nuevacontra" class="boton-morado">Verificar código</button>
-
-    <a routerLink="/verificacion" class="link-action link-purple">Reenviar código</a>
+    <a class="link-action link-purple" (click)="reenviarCodigo()">
+      {{ cargando ? 'Reenviando...' : 'Reenviar código' }}
+    </a>
 
   </div>
 
   <div class="footer-navigation">
-    <a routerLink="/login" class="link-action link-gray">Volver al inicio de sesión</a>
+    <a (click)="irAlLogin()" class="link-action link-gray">
+      Volver al inicio de sesión
+    </a>
   </div>
 
 </div>

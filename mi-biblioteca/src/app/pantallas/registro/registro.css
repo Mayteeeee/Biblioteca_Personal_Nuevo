@@ -137,3 +137,11 @@ h2 {
 .login-link a:hover {
   color: #e07b70;
 }
+
+.nota-correo {
+  font-size: 13px;
+  color: #d67c8d;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.4;
+}
