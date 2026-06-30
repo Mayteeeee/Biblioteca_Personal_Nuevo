@@ -47,14 +47,18 @@
       <div class="lista-lecturas">
         
         <div class="item-libro" *ngFor="let libro of lecturasRecientes">
-          <div class="portada-libro portada-azul">
+          <div class="portada-libro">
             <img
               *ngIf="libro.imagen"
               [src]="libro.imagen"
               alt="Portada"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
 
-            <span *ngIf="!libro.imagen">📖</span>
+            <div
+              *ngIf="!libro.imagen"
+              style="width: 100%; height: 100%; background:#efe5ff; color:#5d24b3; display:flex; align-items:center; justify-content:center; border-radius:8px; font-size:22px;">
+              📖
+            </div>
           </div>
 
           <div class="info-libro">
